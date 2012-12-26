@@ -1,0 +1,6 @@
+[Overrides]
+Identity=unix-group:wheel,desktop_admin_r
+Action=org.opensuse.cupspkhelper.mechanism.*;org.freedesktop.udisks.filesystem-mount-system-internal;org.kde.kcontrol.kcmclock.save;org.kde.kcontrol.kcmkdm.save
+ResultAny=no
+ResultInactive=no
+ResultActive=yes
