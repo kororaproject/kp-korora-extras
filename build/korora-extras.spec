@@ -2,7 +2,7 @@ Summary:  Korora Extras
 Name:     korora-extras
 Version:  0.6
 Release:  1%{?dist}
-Source0:  %{name}-%{version}.tar.bz2
+Source0:  %{name}-%{version}.tar.gz
 License:  GPLv3+
 Group:    System Environment/Base
 Requires:       korora-release sed coreutils akmods yum git vim fontconfig
