@@ -1,15 +1,17 @@
-Summary:  Korora Extras
-Name:     korora-extras
-Version:  0.6
-Release:  1%{?dist}
-Source0:  %{name}-%{version}.tar.gz
-License:  GPLv3+
-Group:    System Environment/Base
+Summary:	Korora Extras
+Name:		korora-extras
+Version:	0.6
+Release:	2%{?dist}
+Source0:	%{name}-%{version}.tar.bz2
+License:	GPLv3+
+Group:		System Environment/Base
 Requires:       korora-release sed coreutils akmods yum git vim fontconfig
-BuildRequires:       policycoreutils
+BuildRequires:       policycoreutils libselinux
+Obsoletes:      kororaa-extras
+Provides:       kororaa-extras
 
 %description
-This package contains various files required for Korora
+This package contains various files required for Kororaa
 such as pretty bash shell, policykit overrides, vimrc, etc.
 
 %prep
@@ -43,7 +45,7 @@ cp -a %{_builddir}/%{name}-%{version}/adblockplus %{buildroot}/%{_libdir}/firefo
 
 #links
 cd %{buildroot}/
-ln -sf /usr/share/doc/korora-release-17/README.pdf %{buildroot}/etc/skel/Desktop/README.pdf
+ln -sf /usr/share/doc/korora-release-18/README.pdf %{buildroot}/etc/skel/Desktop/README.pdf
 cd -
 
 #Set up system-wide hinting
@@ -110,6 +112,9 @@ fi
 /etc/fonts/conf.d/10-autohint.conf
 
 %changelog
+* Thu Oct 25 2012 Chris Smart <csmart@kororaproject.org> 0.6-2
+- Kororaa 18 release.
+
 * Mon May 14 2012 Chris Smart <chris@kororaa.org> 0.6-1
 - Cleaned up for Kororaa 17 release, remove repo files (controlled by yum-repo), etc.
 
