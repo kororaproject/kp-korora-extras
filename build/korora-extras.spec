@@ -1,12 +1,12 @@
-Summary:	Korora Extras
-Name:		korora-extras
-Version:	0.6
-Release:	2%{?dist}
-Source0:	%{name}-%{version}.tar.bz2
-License:	GPLv3+
-Group:		System Environment/Base
+Summary:        Korora Extras
+Name:           korora-extras
+Version:        0.6
+Release:        2%{?dist}
+Source0:        %{name}-%{version}.tar.gz
+License:        GPLv3+
+Group:          System Environment/Base
 Requires:       korora-release sed coreutils akmods yum git vim fontconfig
-BuildRequires:       policycoreutils libselinux
+BuildRequires:  policycoreutils libselinux
 Obsoletes:      kororaa-extras
 Provides:       kororaa-extras
 
