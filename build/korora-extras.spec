@@ -1,7 +1,7 @@
 Summary:        Korora Extras
 Name:           korora-extras
 Version:        0.6
-Release:        2%{?dist}
+Release:        2%{?dist}.1
 Source0:        %{name}-%{version}.tar.gz
 License:        GPLv3+
 Group:          System Environment/Base
@@ -22,6 +22,7 @@ such as pretty bash shell, policykit overrides, vimrc, etc.
 %install
 #mkdir -p %{buildroot}%{_sysconfdir}/yum.repos.d
 mkdir -p %{buildroot}%{_sysconfdir}/skel/Desktop
+mkdir -p %{buildroot}%{_sysconfdir}/skel/Templates
 mkdir -p %{buildroot}%{_sysconfdir}/fonts/conf.d
 #mkdir -p %{buildroot}%{_sysconfdir}/sudoers.d
 mkdir -p %{buildroot}%{_sysconfdir}/profile.d
@@ -40,7 +41,7 @@ install -m 0755 %{_builddir}/%{name}-%{version}/parse-git-branch.sh %{buildroot}
 #rm %{buildroot}%{_bindir}/custom.sh
 install -m 0644 %{_builddir}/%{name}-%{version}/10-korora-overrides.pkla %{buildroot}%{_sharedstatedir}/polkit-1/localauthority/50-local.d/
 cp -a %{_builddir}/%{name}-%{version}/adblockplus %{buildroot}/%{_libdir}/firefox/defaults/profile/
-
+for x in Drawing.odg Presentation.odp Spreadsheet.ods Document.odt ; do touch %{buildroot}%{_sysconfdir}/skel/Templates/$x ; done
 /sbin/restorecon %{buildroot}%{_sharedstatedir}/polkit-1/localauthority/50-local.d/10-korora-overrides.pkla
 
 #links
@@ -103,6 +104,7 @@ fi
 %defattr(-,root,root)
 #%{_sysconfdir}/yum.repos.d/*repo
 %{_sysconfdir}/skel/.vimrc
+%{_sysconfdir}/skel/Templates/*
 #%{_sysconfdir}/sudoers.d/01_korora
 %{_sysconfdir}/profile.d/custom.sh
 %{_bindir}/*sh
