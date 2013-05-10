@@ -1,7 +1,7 @@
 Summary:        Korora Extras
 Name:           korora-extras
-Version:        0.6
-Release:        2%{?dist}.1
+Version:        0.7
+Release:        1%{?dist}
 Source0:        %{name}-%{version}.tar.gz
 License:        GPLv3+
 Group:          System Environment/Base
@@ -45,9 +45,9 @@ for x in Drawing.odg Presentation.odp Spreadsheet.ods Document.odt ; do touch %{
 /sbin/restorecon %{buildroot}%{_sharedstatedir}/polkit-1/localauthority/50-local.d/10-korora-overrides.pkla
 
 #links
-cd %{buildroot}/
-ln -sf /usr/share/doc/korora-release-18/README.pdf %{buildroot}/etc/skel/Desktop/README.pdf
-cd -
+#cd %{buildroot}/
+#ln -sf /usr/share/doc/korora-release-18/README.pdf %{buildroot}/etc/skel/Desktop/README.pdf
+#cd -
 
 #Set up system-wide hinting
 ln -sf /etc/fonts/conf.avail/10-autohint.conf %{buildroot}/etc/fonts/conf.d/
@@ -110,12 +110,15 @@ fi
 %{_bindir}/*sh
 %{_sharedstatedir}/polkit-1/localauthority/50-local.d/*pkla
 %{_libdir}/firefox/defaults/profile/adblockplus/
-/etc/skel/Desktop/README.pdf
+#/etc/skel/Desktop/README.pdf
 /etc/fonts/conf.d/10-autohint.conf
 
 %changelog
+* Fri May 10 2013 Ian Firns <firnsy@kororaproject.org> 0.7-1
+- Korora 19 release.
+
 * Thu Oct 25 2012 Chris Smart <csmart@kororaproject.org> 0.6-2
-- Kororaa 18 release.
+- Korora 18 release.
 
 * Mon May 14 2012 Chris Smart <chris@kororaa.org> 0.6-1
 - Cleaned up for Kororaa 17 release, remove repo files (controlled by yum-repo), etc.
