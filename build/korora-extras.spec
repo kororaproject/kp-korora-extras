@@ -1,7 +1,7 @@
 Summary:        Korora Extras
 Name:           korora-extras
 Version:        0.7
-Release:        1%{?dist}
+Release:        2%{?dist}
 Source0:        %{name}-%{version}.tar.gz
 License:        GPLv3+
 Group:          System Environment/Base
@@ -41,62 +41,37 @@ install -m 0755 %{_builddir}/%{name}-%{version}/parse-git-branch.sh %{buildroot}
 #rm %{buildroot}%{_bindir}/custom.sh
 install -m 0644 %{_builddir}/%{name}-%{version}/10-korora-overrides.pkla %{buildroot}%{_sharedstatedir}/polkit-1/localauthority/50-local.d/
 cp -a %{_builddir}/%{name}-%{version}/adblockplus %{buildroot}/%{_libdir}/firefox/defaults/profile/
-for x in Drawing.odg Presentation.odp Spreadsheet.ods Document.odt ; do touch %{buildroot}%{_sysconfdir}/skel/Templates/$x ; done
+for x in Text.txt Image.png Presentation.odp Spreadsheet.ods Document.odt ; do touch %{buildroot}%{_sysconfdir}/skel/Templates/$x ; done
 /sbin/restorecon %{buildroot}%{_sharedstatedir}/polkit-1/localauthority/50-local.d/10-korora-overrides.pkla
-
-#links
-#cd %{buildroot}/
-#ln -sf /usr/share/doc/korora-release-18/README.pdf %{buildroot}/etc/skel/Desktop/README.pdf
-#cd -
 
 #Set up system-wide hinting
 ln -sf /etc/fonts/conf.avail/10-autohint.conf %{buildroot}/etc/fonts/conf.d/
 
-#Others
-#chmod a+x %{buildroot}%{_bindir}/parse-git-branch.sh
-
 %posttrans
 
 %post
-#Create vboxusers group
-groupadd -r vboxusers 2>/dev/null
-
-#/sbin/restorecon '/var/lib/polkit-1/localauthority/50-local.d/10-korora-overrides.pkla'
-
-#Set installonly limit in yum.conf
-if [ -z "$(grep installonly_limit=2 /etc/yum.conf)" ]
+#Only do this on first install, not upgrades
+if [ "$1" == "1" ]
 then
-  sed -i 's/^installonly_limit=.*/installonly_limit=2/g' /etc/yum.conf
+  #Create vboxusers group
+  groupadd -r vboxusers 2>/dev/null
+
+  #/sbin/restorecon '/var/lib/polkit-1/localauthority/50-local.d/10-korora-overrides.pkla'
+
+  #Set installonly limit in yum.conf
+  if [ -z "$(grep installonly_limit=2 /etc/yum.conf)" ]
+  then
+    sed -i 's/^installonly_limit=.*/installonly_limit=2/g' /etc/yum.conf
+  fi
+
+  #Set clean_requirements_on_remove in yum.conf
+  if [ -z "$(grep clean_requirements_on_remove /etc/yum.conf)" ]
+  then
+    sed -i 's/^clean_requirements_on_remove=.*/clean_requirements_on_remove=1/g' /etc/yum.conf
+  else
+    sed -i '/^installonly_limit=.*/ a clean_requirements_on_remove=1' /etc/yum.conf
+  fi
 fi
-
-#Not needed now because we are using our own adobe-release package
-##Disable AdobeReader, if using adobe repo
-#if [ -e /etc/yum.repos.d/adobe-linux-i386.repo -a -z "$(grep exclude=AdobeReader* /etc/yum.repos.d/adobe-linux-i386.repo 2>/dev/null)" ]
-#then
-#  echo "exclude=AdobeReader*" >> /etc/yum.repos.d/adobe-linux-i386.repo
-#fi
-##We might be on 64bit with 64bit adobe, or we might be on 64bit with 32bit adobe.., so best check
-#if [ -e /etc/yum.repos.d/adobe-linux-x86_64.repo -a -z "$(grep exclude=AdobeReader* /etc/yum.repos.d/adobe-linux-x86_64.repo 2>/dev/null)" ]
-#then
-#  echo "exclude=AdobeReader*" >> /etc/yum.repos.d/adobe-linux-x86_64.repo
-#fi
-
-#Fix error on akmods boot
-#if [ -n "$(grep "exit \${1:-128}" /usr/sbin/akmods)" ]
-#then
-#  sed -i s/exit\ \${1:-128}/exit\ \${1:0}/ /usr/sbin/akmods
-#fi
-
-#cleanup obsolete firefox profile locations
-#rm -Rf %{_libdir}/firefox-{3.6,4,5,6,7,8} 2>/dev/null
-
-#%ifarch x86_64
-#if [ -f /etc/yum.repos.d/adobe-linux-i386.repo ]
-#then
-#  sed -i s/i386/x86_64/ /etc/yum.repos.d/adobe-linux-i386.repo
-#  mv /etc/yum.repos.d/adobe-linux-i386.repo /etc/yum.repos.d/adobe-linux-x86_64.repo
-#fi
-#%endif
 
 %postun
 
@@ -114,6 +89,9 @@ fi
 /etc/fonts/conf.d/10-autohint.conf
 
 %changelog
+* Sun Jun 16 2013 Chris Smart <csmart@kororaproject.org> 0.7-2
+- Set clean_requirements_on_remove to yum.conf.
+
 * Fri May 10 2013 Ian Firns <firnsy@kororaproject.org> 0.7-1
 - Korora 19 release.
 
