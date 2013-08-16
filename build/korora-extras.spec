@@ -1,17 +1,17 @@
 Summary:        Korora Extras
 Name:           korora-extras
 Version:        0.7
-Release:        2%{?dist}
+Release:        3%{?dist}
 Source0:        %{name}-%{version}.tar.gz
 License:        GPLv3+
 Group:          System Environment/Base
-Requires:       korora-release sed coreutils akmods yum git vim fontconfig
+Requires:       korora-release
 BuildRequires:  policycoreutils libselinux
 Obsoletes:      kororaa-extras
 Provides:       kororaa-extras
 
 %description
-This package contains various files required for Kororaa
+This package contains various files required for Korora
 such as pretty bash shell, policykit overrides, vimrc, etc.
 
 %prep
@@ -26,7 +26,7 @@ mkdir -p %{buildroot}%{_sysconfdir}/skel/Templates
 mkdir -p %{buildroot}%{_sysconfdir}/fonts/conf.d
 #mkdir -p %{buildroot}%{_sysconfdir}/sudoers.d
 mkdir -p %{buildroot}%{_sysconfdir}/profile.d
-mkdir -p %{buildroot}%{_sharedstatedir}/polkit-1/localauthority/50-local.d/
+mkdir -p %{buildroot}%{_datadir}/polkit-1/rules.d
 mkdir -p %{buildroot}%{_bindir}
 mkdir -p %{buildroot}%{_libdir}/firefox/defaults/profile
 
@@ -39,7 +39,7 @@ install -m 0755 %{_builddir}/%{name}-%{version}/parse-git-branch.sh %{buildroot}
 #cp -a %{_builddir}/%{name}-%{version}/*sh %{buildroot}%{_bindir}/
 #removing this custom.sh because this goes under profile.d instead and I was lazy above and copied all shell scripts to bin
 #rm %{buildroot}%{_bindir}/custom.sh
-install -m 0644 %{_builddir}/%{name}-%{version}/10-korora-overrides.pkla %{buildroot}%{_sharedstatedir}/polkit-1/localauthority/50-local.d/
+install -m 0644 %{_builddir}/%{name}-%{version}/10-korora-policy.rules %{buildroot}%{_datadir}/polkit-1/rules.d/10-korora-policy.rules
 cp -a %{_builddir}/%{name}-%{version}/adblockplus %{buildroot}/%{_libdir}/firefox/defaults/profile/
 for x in Text.txt Image.png Presentation.odp Spreadsheet.ods Document.odt ; do touch %{buildroot}%{_sysconfdir}/skel/Templates/$x ; done
 /sbin/restorecon %{buildroot}%{_sharedstatedir}/polkit-1/localauthority/50-local.d/10-korora-overrides.pkla
@@ -67,9 +67,9 @@ then
   #Set clean_requirements_on_remove in yum.conf
   if [ -z "$(grep clean_requirements_on_remove /etc/yum.conf)" ]
   then
-    sed -i 's/^clean_requirements_on_remove=.*/clean_requirements_on_remove=1/g' /etc/yum.conf
-  else
     sed -i '/^installonly_limit=.*/ a clean_requirements_on_remove=1' /etc/yum.conf
+  else
+    sed -i 's/^clean_requirements_on_remove=.*/clean_requirements_on_remove=1/g' /etc/yum.conf
   fi
 fi
 
@@ -83,12 +83,15 @@ fi
 #%{_sysconfdir}/sudoers.d/01_korora
 %{_sysconfdir}/profile.d/custom.sh
 %{_bindir}/*sh
-%{_sharedstatedir}/polkit-1/localauthority/50-local.d/*pkla
+%{_datadir}/polkit-1/rules.d/10-korora-policy.rules
 %{_libdir}/firefox/defaults/profile/adblockplus/
 #/etc/skel/Desktop/README.pdf
 /etc/fonts/conf.d/10-autohint.conf
 
 %changelog
+* Sat Aug 17 2013 Chris Smart <csmart@kororaproject.org> 0.7-3
+- Fix location of policykit overrides and format of file, which have changed.
+
 * Sun Jun 16 2013 Chris Smart <csmart@kororaproject.org> 0.7-2
 - Set clean_requirements_on_remove to yum.conf.
 
