@@ -1,11 +1,12 @@
 Summary:        Korora Extras
 Name:           korora-extras
 Version:        0.7
-Release:        3%{?dist}
+Release:        3%{?dist}.1
 Source0:        %{name}-%{version}.tar.gz
 License:        GPLv3+
 Group:          System Environment/Base
 Requires:       korora-release
+Requires(post): yum
 BuildRequires:  policycoreutils libselinux
 Obsoletes:      kororaa-extras
 Provides:       kororaa-extras
