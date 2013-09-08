@@ -12,7 +12,6 @@ alias la='ls -a --color=auto'
 alias lla='ls -la --color=auto'
 alias mv='mv -i'
 alias rm='rm -i'
-alias vi='vim'
 alias which='alias | /usr/bin/which --tty-only --read-alias --show-dot --show-tilde'
 
 #Set terminal colours
