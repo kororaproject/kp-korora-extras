@@ -1,7 +1,7 @@
 Summary:        Korora Extras
 Name:           korora-extras
 Version:        0.7
-Release:        3%{?dist}.2
+Release:        4%{?dist}
 Source0:        %{name}-%{version}.tar.gz
 License:        GPLv3+
 Group:          System Environment/Base
@@ -46,7 +46,7 @@ for x in Text.txt Image.png Presentation.odp Spreadsheet.ods Document.odt ; do t
 /sbin/restorecon %{buildroot}%{_sharedstatedir}/polkit-1/localauthority/50-local.d/10-korora-overrides.pkla
 
 #Set up system-wide hinting
-ln -sf /etc/fonts/conf.avail/10-autohint.conf %{buildroot}/etc/fonts/conf.d/
+ln -sf /usr/share/fontconfig/conf.avail/10-autohint.conf %{buildroot}/etc/fonts/conf.d/
 
 %posttrans
 
@@ -90,6 +90,9 @@ fi
 /etc/fonts/conf.d/10-autohint.conf
 
 %changelog
+* Thu Sep 25 2013 Chris Smart <csmart@kororaproject.org> 0.7-4
+- Fix font hinting link, which has moved to /usr/
+
 * Sat Aug 17 2013 Chris Smart <csmart@kororaproject.org> 0.7-3
 - Fix location of policykit overrides and format of file, which have changed.
 
