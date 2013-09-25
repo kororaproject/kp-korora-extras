@@ -1,0 +1,4 @@
+#!/bin/sh
+fstrim -v /
+fstrim -v /home
+fstrim -v /boot

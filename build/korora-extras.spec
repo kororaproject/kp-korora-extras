@@ -1,7 +1,7 @@
 Summary:        Korora Extras
 Name:           korora-extras
 Version:        0.7
-Release:        4%{?dist}
+Release:        5%{?dist}
 Source0:        %{name}-%{version}.tar.gz
 License:        GPLv3+
 Group:          System Environment/Base
@@ -23,6 +23,7 @@ such as pretty bash shell, policykit overrides, vimrc, etc.
 %install
 #mkdir -p %{buildroot}%{_sysconfdir}/yum.repos.d
 mkdir -p %{buildroot}%{_sysconfdir}/skel/Desktop
+mkdir -p %{buildroot}%{_sysconfdir}/cron.hourly
 mkdir -p %{buildroot}%{_sysconfdir}/skel/Templates
 mkdir -p %{buildroot}%{_sysconfdir}/fonts/conf.d
 #mkdir -p %{buildroot}%{_sysconfdir}/sudoers.d
@@ -32,6 +33,7 @@ mkdir -p %{buildroot}%{_bindir}
 mkdir -p %{buildroot}%{_libdir}/firefox/defaults/profile
 
 #cp -a %{_builddir}/%{name}-%{version}/*repo %{buildroot}%{_sysconfdir}/yum.repos.d/
+install -m 0755 %{_builddir}/%{name}-%{version}/fstrim %{buildroot}%{_sysconfdir}/cron.hourly/fstrim
 install -m 0755 %{_builddir}/%{name}-%{version}/vimrc %{buildroot}%{_sysconfdir}/skel/.vimrc
 #cp -a %{_builddir}/%{name}-%{version}/01_korora %{buildroot}%{_sysconfdir}/sudoers.d/
 install -m 0755 %{_builddir}/%{name}-%{version}/custom.sh %{buildroot}%{_sysconfdir}/profile.d/custom.sh
@@ -79,6 +81,7 @@ fi
 %files
 %defattr(-,root,root)
 #%{_sysconfdir}/yum.repos.d/*repo
+%{_sysconfdir}/cron.hourly/fstrim
 %{_sysconfdir}/skel/.vimrc
 %{_sysconfdir}/skel/Templates/*
 #%{_sysconfdir}/sudoers.d/01_korora
@@ -86,10 +89,13 @@ fi
 %{_bindir}/*sh
 %{_datadir}/polkit-1/rules.d/10-korora-policy.rules
 %{_libdir}/firefox/defaults/profile/adblockplus/
+%{_sysconfdir}/fonts/conf.d/10-autohint.conf
 #/etc/skel/Desktop/README.pdf
-/etc/fonts/conf.d/10-autohint.conf
 
 %changelog
+* Thu Sep 25 2013 Chris Smart <csmart@kororaproject.org> 0.7-5
+- Add cronjob for running fstrim
+
 * Thu Sep 25 2013 Chris Smart <csmart@kororaproject.org> 0.7-4
 - Fix font hinting link, which has moved to /usr/
 
