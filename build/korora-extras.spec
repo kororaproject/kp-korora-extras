@@ -1,7 +1,7 @@
 Summary:        Korora Extras
 Name:           korora-extras
-Version:        0.7
-Release:        5%{?dist}
+Version:        0.8
+Release:        1%{?dist}
 Source0:        %{name}-%{version}.tar.gz
 License:        GPLv3+
 Group:          System Environment/Base
@@ -30,7 +30,7 @@ mkdir -p %{buildroot}%{_sysconfdir}/fonts/conf.d
 mkdir -p %{buildroot}%{_sysconfdir}/profile.d
 mkdir -p %{buildroot}%{_datadir}/polkit-1/rules.d
 mkdir -p %{buildroot}%{_bindir}
-mkdir -p %{buildroot}%{_libdir}/firefox/defaults/profile
+mkdir -p %{buildroot}%{_libdir}/firefox/browser/defaults/profile
 
 #cp -a %{_builddir}/%{name}-%{version}/*repo %{buildroot}%{_sysconfdir}/yum.repos.d/
 install -m 0755 %{_builddir}/%{name}-%{version}/fstrim %{buildroot}%{_sysconfdir}/cron.hourly/fstrim
@@ -43,7 +43,7 @@ install -m 0755 %{_builddir}/%{name}-%{version}/parse-git-branch.sh %{buildroot}
 #removing this custom.sh because this goes under profile.d instead and I was lazy above and copied all shell scripts to bin
 #rm %{buildroot}%{_bindir}/custom.sh
 install -m 0644 %{_builddir}/%{name}-%{version}/10-korora-policy.rules %{buildroot}%{_datadir}/polkit-1/rules.d/10-korora-policy.rules
-cp -a %{_builddir}/%{name}-%{version}/adblockplus %{buildroot}/%{_libdir}/firefox/defaults/profile/
+cp -a %{_builddir}/%{name}-%{version}/adblockplus %{buildroot}/%{_libdir}/firefox/browser/defaults/profile/
 for x in Text.txt Image.png Presentation.odp Spreadsheet.ods Document.odt ; do touch %{buildroot}%{_sysconfdir}/skel/Templates/$x ; done
 /sbin/restorecon %{buildroot}%{_sharedstatedir}/polkit-1/localauthority/50-local.d/10-korora-overrides.pkla
 
@@ -88,11 +88,14 @@ fi
 %{_sysconfdir}/profile.d/custom.sh
 %{_bindir}/*sh
 %{_datadir}/polkit-1/rules.d/10-korora-policy.rules
-%{_libdir}/firefox/defaults/profile/adblockplus/
+%{_libdir}/firefox/browser/defaults/profile/adblockplus/
 %{_sysconfdir}/fonts/conf.d/10-autohint.conf
 #/etc/skel/Desktop/README.pdf
 
 %changelog
+* Sat Dec 28 2013 Chris Smart <csmart@kororaproject.org> 0.8-1
+- Fix adblock plus subscription
+
 * Thu Sep 25 2013 Chris Smart <csmart@kororaproject.org> 0.7-5
 - Add cronjob for running fstrim
 
