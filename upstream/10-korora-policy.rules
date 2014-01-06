@@ -13,14 +13,28 @@ polkit.addRule(function(action, subject) {
 });
 
 polkit.addRule(function(action, subject) {
-    if (action.id == "org.freedesktop.udisks.filesystem-mount-system-internal" &&
+    if (action.id.indexOf("org.freedesktop.udisks2.filesystem-mount") == 0 &&
         subject.isInGroup("wheel") && subject.active) {
         return polkit.Result.YES;
     }
 });
 
 polkit.addRule(function(action, subject) {
-    if (action.id == "org.opensuse.cupspkhelper.mechanism.*" &&
+    if (action.id.indexOf("org.freedesktop.udisks.filesystem-mount") == 0 &&
+        subject.isInGroup("wheel") && subject.active) {
+        return polkit.Result.YES;
+    }
+});
+
+polkit.addRule(function(action, subject) {
+    if (action.id.indexOf("org.opensuse.cupspkhelper.mechanism.") == 0 &&
+        subject.isInGroup("wheel") && subject.active) {
+        return polkit.Result.YES;
+    }
+});
+
+polkit.addRule(function(action, subject) {
+    if (action.id == "org.fedoraproject.FirewallD1.config" &&
         subject.isInGroup("wheel") && subject.active) {
         return polkit.Result.YES;
     }
