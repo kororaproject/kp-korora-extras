@@ -3,7 +3,7 @@
 Summary:        Korora Extras
 Name:           korora-extras
 Version:        0.8
-Release:        1%{?dist}.1
+Release:        2%{?dist}
 Source0:        %{name}-%{version}.tar.gz
 License:        GPLv3+
 Group:          System Environment/Base
@@ -26,7 +26,6 @@ such as pretty bash shell, policykit overrides, vimrc, etc.
 #mkdir -p %{buildroot}%{_sysconfdir}/yum.repos.d
 mkdir -p %{buildroot}%{_sysconfdir}/skel/Desktop
 mkdir -p %{buildroot}%{_sysconfdir}/cron.hourly
-mkdir -p %{buildroot}%{_sysconfdir}/skel/Templates
 mkdir -p %{buildroot}%{_sysconfdir}/fonts/conf.d
 #mkdir -p %{buildroot}%{_sysconfdir}/sudoers.d
 mkdir -p %{buildroot}%{_sysconfdir}/profile.d
@@ -46,7 +45,8 @@ install -m 0755 %{_builddir}/%{name}-%{version}/parse-git-branch.sh %{buildroot}
 #rm %{buildroot}%{_bindir}/custom.sh
 install -m 0644 %{_builddir}/%{name}-%{version}/10-korora-policy.rules %{buildroot}%{_datadir}/polkit-1/rules.d/10-korora-policy.rules
 cp -a %{_builddir}/%{name}-%{version}/adblockplus %{buildroot}/%{_libdir}/firefox/browser/defaults/profile/
-for x in Text.txt Image.png Presentation.odp Spreadsheet.ods Document.odt ; do touch %{buildroot}%{_sysconfdir}/skel/Templates/$x ; done
+#for x in Text.txt Image.png Presentation.odp Spreadsheet.ods Document.odt ; do touch %{buildroot}%{_sysconfdir}/skel/Templates/$x ; done
+cp -a %{_builddir}/%{name}-%{version}/Templates %{buildroot}%{_sysconfdir}/skel/
 /sbin/restorecon %{buildroot}%{_sharedstatedir}/polkit-1/localauthority/50-local.d/10-korora-overrides.pkla
 
 #Set up system-wide hinting
@@ -95,6 +95,9 @@ fi
 #/etc/skel/Desktop/README.pdf
 
 %changelog
+* Tue Jan 28 2014 Chris Smart <csmart@kororaproject.org> 0.8-2
+- Fix open document templates, empty files don't open.
+
 * Sat Dec 28 2013 Chris Smart <csmart@kororaproject.org> 0.8-1
 - Fix adblock plus subscription
 
