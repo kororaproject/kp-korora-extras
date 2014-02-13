@@ -1,5 +1,5 @@
-#Turn off annoying blinking
-setterm -blength 0
+#Turn off annoying blinking if interactive
+tty -s && setterm -blength 0
 
 #Set aliases
 alias cp='cp -i'
