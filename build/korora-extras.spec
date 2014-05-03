@@ -3,7 +3,7 @@
 Summary:        Korora Extras
 Name:           korora-extras
 Version:        0.8
-Release:        2%{?dist}
+Release:        3%{?dist}
 Source0:        %{name}-%{version}.tar.gz
 License:        GPLv3+
 Group:          System Environment/Base
@@ -95,6 +95,10 @@ fi
 #/etc/skel/Desktop/README.pdf
 
 %changelog
+* Sat May 3 2014 Chris Smart <csmart@kororaproject.org> 0.8-3
+- Fix setterm error when using non-interactive shell logins.
+- Thanks to mdonnelly for fix.
+
 * Tue Jan 28 2014 Chris Smart <csmart@kororaproject.org> 0.8-2
 - Fix open document templates, empty files don't open.
 
