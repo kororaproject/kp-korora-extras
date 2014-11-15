@@ -2,8 +2,8 @@
 
 Summary:        Korora Extras
 Name:           korora-extras
-Version:        0.8
-Release:        3%{?dist}
+Version:        0.9
+Release:        1%{?dist}
 Source0:        %{name}-%{version}.tar.gz
 License:        GPLv3+
 Group:          System Environment/Base
@@ -95,6 +95,9 @@ fi
 #/etc/skel/Desktop/README.pdf
 
 %changelog
+* Sun Nov 16 2014 Ian Firns <firnsy@kororaproject.org> 0.9-1
+- xterm does not support blength for disabling blink.
+
 * Sat May 3 2014 Chris Smart <csmart@kororaproject.org> 0.8-3
 - Fix setterm error when using non-interactive shell logins.
 - Thanks to mdonnelly for fix.
