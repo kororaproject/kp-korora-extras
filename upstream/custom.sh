@@ -1,5 +1,5 @@
 #Turn off annoying blinking if interactive
-tty -s && [ $TERM != "xterm" ] && setterm --blength 0
+tty -s && [ $TERM != "xterm" ] && setterm --blength 0 2>/dev/null
 
 #Set aliases
 alias cp='cp -i'
