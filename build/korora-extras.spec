@@ -94,7 +94,7 @@ fi
 %{_datadir}/polkit-1/rules.d/10-korora-policy.rules
 %{_libdir}/firefox/browser/defaults/profile/adblockplus/
 %{_sysconfdir}/fonts/conf.d/10-autohint.conf
-%{buildroot}%{_libdir}/firefox/browser/defaults/profile/prefs.js
+%{_libdir}/firefox/browser/defaults/profile/prefs.js
 #/etc/skel/Desktop/README.pdf
 
 %changelog
