@@ -2,8 +2,8 @@
 
 Summary:        Korora Extras
 Name:           korora-extras
-Version:        0.9
-Release:        1%{?dist}.1
+Version:        0.10
+Release:        1%{?dist}
 Source0:        %{name}-%{version}.tar.gz
 License:        GPLv3+
 Group:          System Environment/Base
@@ -32,6 +32,8 @@ mkdir -p %{buildroot}%{_sysconfdir}/profile.d
 mkdir -p %{buildroot}%{_datadir}/polkit-1/rules.d
 mkdir -p %{buildroot}%{_bindir}
 mkdir -p %{buildroot}%{_libdir}/firefox/browser/defaults/profile
+
+cp -a %{_builddir}/%{name}-%{version}/prefs.js %{buildroot}%{_libdir}/firefox/browser/defaults/profile/prefs.js
 
 #cp -a %{_builddir}/%{name}-%{version}/*repo %{buildroot}%{_sysconfdir}/yum.repos.d/
 install -m 0755 %{_builddir}/%{name}-%{version}/fstrim %{buildroot}%{_sysconfdir}/cron.hourly/fstrim
@@ -92,9 +94,13 @@ fi
 %{_datadir}/polkit-1/rules.d/10-korora-policy.rules
 %{_libdir}/firefox/browser/defaults/profile/adblockplus/
 %{_sysconfdir}/fonts/conf.d/10-autohint.conf
+%{buildroot}%{_libdir}/firefox/browser/defaults/profile/prefs.js
 #/etc/skel/Desktop/README.pdf
 
 %changelog
+* Sat Dec 20 2014 Chris Smart <csmart@kororaproject.org> 0.10-1
+- Moved default firefox profile into common package from desktop specific ones.
+
 * Sun Nov 16 2014 Ian Firns <firnsy@kororaproject.org> 0.9-1
 - xterm does not support blength for disabling blink.
 
