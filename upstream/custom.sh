@@ -1,5 +1,12 @@
 # Source for git information in prompt
-source /usr/share/doc/git/contrib/completion/git-prompt.sh
+if [ -f /usr/share/doc/git/contrib/completion/git-prompt.sh ]; then
+  source /usr/share/doc/git/contrib/completion/git-prompt.sh
+else
+  __git_ps1
+  {
+    : # Git is not installed so stub out function
+  }
+fi
 
 #Turn off annoying blinking if interactive
 tty -s && [ $TERM != "xterm" ] && setterm --blength 0 2>/dev/null
