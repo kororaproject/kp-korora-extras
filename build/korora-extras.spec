@@ -40,7 +40,6 @@ install -m 0755 %{_builddir}/%{name}-%{version}/fstrim %{buildroot}%{_sysconfdir
 install -m 0755 %{_builddir}/%{name}-%{version}/vimrc %{buildroot}%{_sysconfdir}/skel/.vimrc
 #cp -a %{_builddir}/%{name}-%{version}/01_korora %{buildroot}%{_sysconfdir}/sudoers.d/
 install -m 0755 %{_builddir}/%{name}-%{version}/custom.sh %{buildroot}%{_sysconfdir}/profile.d/custom.sh
-install -m 0755 %{_builddir}/%{name}-%{version}/parse-git-branch.sh %{buildroot}%{_bindir}/parse-git-branch.sh
 #install -m 0440 %{_builddir}/%{name}-%{version}/01_korora %{buildroot}%{_sysconfdir}/sudoers.d/01_korora
 #cp -a %{_builddir}/%{name}-%{version}/*sh %{buildroot}%{_bindir}/
 #removing this custom.sh because this goes under profile.d instead and I was lazy above and copied all shell scripts to bin
