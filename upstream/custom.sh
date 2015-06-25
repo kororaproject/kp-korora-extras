@@ -1,3 +1,13 @@
+# Source for git information in prompt
+if [ -f /usr/share/doc/git/contrib/completion/git-prompt.sh ]; then
+  source /usr/share/doc/git/contrib/completion/git-prompt.sh
+else
+  __git_ps1
+  {
+    : # Git is not installed so stub out function
+  }
+fi
+
 #Turn off annoying blinking if interactive
 tty -s && [ $TERM != "xterm" ] && setterm --blength 0 2>/dev/null
 
@@ -17,8 +27,8 @@ alias which='alias | /usr/bin/which --tty-only --read-alias --show-dot --show-ti
 #Set terminal colours
 if [ ${EUID} -eq 0 ] ; then
 	#red and # prompt
-  export PS1="\[\033[0;34m\][\$(date +%H:%M)] \[\033[0;31m\]\u\[\033[0;36m\]@\[\033[0;31m\]\h\[\033[0;34m\] \W\[\033[0;32m\]\$(parse-git-branch.sh) \[\033[0;34m\]#\[\033[00m\] "
+  export PS1="\[\033[0;34m\][\$(date +%H:%M)] \[\033[0;31m\]\u\[\033[0;36m\]@\[\033[0;31m\]\h\[\033[0;34m\] \W\[\033[0;32m\]\$(__git_ps1 \" (%s)\") \[\033[0;34m\]#\[\033[00m\] "
 else
 	#green and $ prompt
-  export PS1="\[\033[0;34m\][\$(date +%H:%M)] \[\033[0;32m\]\u\[\033[0;36m\]@\[\033[0;32m\]\h\[\033[0;34m\] \W\[\033[0;32m\]\$(parse-git-branch.sh) \[\033[0;34m\]$\[\033[00m\] "
+  export PS1="\[\033[0;34m\][\$(date +%H:%M)] \[\033[0;32m\]\u\[\033[0;36m\]@\[\033[0;32m\]\h\[\033[0;34m\] \W\[\033[0;32m\]\$(__git_ps1 \" (%s)\") \[\033[0;34m\]$\[\033[00m\] "
 fi
