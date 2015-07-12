@@ -3,7 +3,7 @@
 Summary:        Korora Extras
 Name:           korora-extras
 Version:        0.10
-Release:        1%{?dist}
+Release:        2%{?dist}
 Source0:        %{name}-%{version}.tar.gz
 License:        GPLv3+
 Group:          System Environment/Base
@@ -89,7 +89,6 @@ fi
 %{_sysconfdir}/skel/Templates/*
 #%{_sysconfdir}/sudoers.d/01_korora
 %{_sysconfdir}/profile.d/custom.sh
-%{_bindir}/*sh
 %{_datadir}/polkit-1/rules.d/10-korora-policy.rules
 %{_libdir}/firefox/browser/defaults/profile/adblockplus/
 %{_sysconfdir}/fonts/conf.d/10-autohint.conf
@@ -97,6 +96,9 @@ fi
 #/etc/skel/Desktop/README.pdf
 
 %changelog
+* Sun Jul 12 2015 Chris Smart <csmart@kororaproject.org> 0.10-2
+- Use builtin git shell functions instead of custom bash script for PS1, thanks lithrem
+
 * Sat Dec 20 2014 Chris Smart <csmart@kororaproject.org> 0.10-1
 - Moved default firefox profile into common package from desktop specific ones.
 
