@@ -30,6 +30,7 @@ mkdir -p %{buildroot}%{_sysconfdir}/fonts/conf.d
 #mkdir -p %{buildroot}%{_sysconfdir}/sudoers.d
 mkdir -p %{buildroot}%{_sysconfdir}/profile.d
 mkdir -p %{buildroot}%{_datadir}/polkit-1/rules.d
+mkdir -p %{buildroot}%{_datadir}/%{name}
 mkdir -p %{buildroot}%{_bindir}
 mkdir -p %{buildroot}%{_libdir}/firefox/browser/defaults/profile
 
@@ -40,6 +41,7 @@ install -m 0755 %{_builddir}/%{name}-%{version}/fstrim %{buildroot}%{_sysconfdir
 install -m 0755 %{_builddir}/%{name}-%{version}/vimrc %{buildroot}%{_sysconfdir}/skel/.vimrc
 #cp -a %{_builddir}/%{name}-%{version}/01_korora %{buildroot}%{_sysconfdir}/sudoers.d/
 install -m 0755 %{_builddir}/%{name}-%{version}/custom.sh %{buildroot}%{_sysconfdir}/profile.d/custom.sh
+install -m 0644 %{_builddir}/%{name}-%{version}/dircolors.ansi-universal %{buildroot}%{_datadir}/%{name}/dircolors.ansi-universal
 #install -m 0440 %{_builddir}/%{name}-%{version}/01_korora %{buildroot}%{_sysconfdir}/sudoers.d/01_korora
 #cp -a %{_builddir}/%{name}-%{version}/*sh %{buildroot}%{_bindir}/
 #removing this custom.sh because this goes under profile.d instead and I was lazy above and copied all shell scripts to bin
@@ -89,6 +91,7 @@ fi
 %{_sysconfdir}/skel/Templates/*
 #%{_sysconfdir}/sudoers.d/01_korora
 %{_sysconfdir}/profile.d/custom.sh
+%{_datadir}/%{name}/dircolors.ansi-universal
 %{_datadir}/polkit-1/rules.d/10-korora-policy.rules
 %{_libdir}/firefox/browser/defaults/profile/adblockplus/
 %{_sysconfdir}/fonts/conf.d/10-autohint.conf
@@ -96,7 +99,7 @@ fi
 #/etc/skel/Desktop/README.pdf
 
 %changelog
-* Thur Jul 23 2015 Chris Smart <csmart@kororaproject.org> 0.11-1
+* Thu Jul 23 2015 Chris Smart <csmart@kororaproject.org> 0.11-1
 - Use solarized for color scheme to make it easier to see in major terminals
 
 * Sun Jul 12 2015 Chris Smart <csmart@kororaproject.org> 0.10-2
