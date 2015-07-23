@@ -2,8 +2,8 @@
 
 Summary:        Korora Extras
 Name:           korora-extras
-Version:        0.10
-Release:        2%{?dist}
+Version:        0.11
+Release:        1%{?dist}
 Source0:        %{name}-%{version}.tar.gz
 License:        GPLv3+
 Group:          System Environment/Base
@@ -96,6 +96,9 @@ fi
 #/etc/skel/Desktop/README.pdf
 
 %changelog
+* Thur Jul 23 2015 Chris Smart <csmart@kororaproject.org> 0.11-1
+- Use solarized for color scheme to make it easier to see in major terminals
+
 * Sun Jul 12 2015 Chris Smart <csmart@kororaproject.org> 0.10-2
 - Use builtin git shell functions instead of custom bash script for PS1, thanks lithrem
 
