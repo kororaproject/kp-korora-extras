@@ -37,12 +37,12 @@ HAVE_LESS=$(command -v less)
 if [ -n "$HAVE_LESS" -a -z "${MANPAGER}" ] ; then
   man() {
       env LESS_TERMCAP_mb=$(printf "\e[1;31m") \
-      LESS_TERMCAP_md=$(printf "\e[0;34m") \
+      LESS_TERMCAP_md=$(printf "\e[38;5;33m") \
       LESS_TERMCAP_me=$(printf "\e[0m") \
       LESS_TERMCAP_se=$(printf "\e[0m") \
       LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
       LESS_TERMCAP_ue=$(printf "\e[0m") \
-      LESS_TERMCAP_us=$(printf "\e[04;32m") \
+      LESS_TERMCAP_us=$(printf "\e[38;5;136;4m") \
       GROFF_NO_SGR=yes \
       man "$@"
   }
