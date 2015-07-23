@@ -32,3 +32,18 @@ else
 	#green and $ prompt
   export PS1="\[\033[0;34m\][\$(date +%H:%M)] \[\033[0;32m\]\u\[\033[0;36m\]@\[\033[0;32m\]\h\[\033[0;34m\] \W\[\033[0;32m\]\$(__git_ps1 \" (%s)\") \[\033[0;34m\]$\[\033[00m\] "
 fi
+
+HAVE_LESS=$(command -v less)
+if [ -n "$HAVE_LESS" -a -z "${MANPAGER}" ] ; then
+  man() {
+      env LESS_TERMCAP_mb=$(printf "\e[1;31m") \
+      LESS_TERMCAP_md=$(printf "\e[0;34m") \
+      LESS_TERMCAP_me=$(printf "\e[0m") \
+      LESS_TERMCAP_se=$(printf "\e[0m") \
+      LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
+      LESS_TERMCAP_ue=$(printf "\e[0m") \
+      LESS_TERMCAP_us=$(printf "\e[04;32m") \
+      GROFF_NO_SGR=yes \
+      man "$@"
+  }
+fi
