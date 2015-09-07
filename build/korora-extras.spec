@@ -3,7 +3,7 @@
 Summary:        Korora Extras
 Name:           korora-extras
 Version:        0.11
-Release:        1%{?dist}
+Release:        2%{?dist}
 Source0:        %{name}-%{version}.tar.gz
 License:        GPLv3+
 Group:          System Environment/Base
@@ -99,6 +99,9 @@ fi
 #/etc/skel/Desktop/README.pdf
 
 %changelog
+* Mon Sep 7 2015 Chris Smart <csmart@kororaproject.org> 0.11-2
+- Only show hostname on terminal PS1 when we are connected via SSH
+
 * Thu Jul 23 2015 Chris Smart <csmart@kororaproject.org> 0.11-1
 - Use solarized for color scheme to make it easier to see in major terminals
 

@@ -1,6 +1,12 @@
 # Source for git information in prompt
 if [ -f /usr/share/doc/git/contrib/completion/git-prompt.sh ]; then
   source /usr/share/doc/git/contrib/completion/git-prompt.sh
+  GIT_PS1_SHOWDIRTYSTATE=1
+  GIT_PS1_SHOWSTASHSTATE=1
+  GIT_PS1_SHOWUNTRACKEDFILES=1
+  GIT_PS1_SHOWUPSTREAM="verbose legacy git"
+  GIT_PS1_DESCRIBE_STYLE=default
+#  GIT_PS1_SHOWCOLORHINTS=1
 else
   __git_ps1
   {
@@ -26,11 +32,23 @@ alias which='alias | /usr/bin/which --tty-only --read-alias --show-dot --show-ti
 
 #Set terminal colours
 if [ ${EUID} -eq 0 ] ; then
-  #red and # prompt
-  export PS1="\[\033[38;5;37m\]\A\[\033[38;5;15m\] \[\033[38;5;160m\]\u\[\033[38;5;37m\]@\[\033[38;5;160m\]\h\[\033[38;5;15m\] \[\033[38;5;64m\]\W\[\033[38;5;136m\]\$(__git_ps1 \" (%s)\")\[\033[38;5;245m\] \\$\[\033[00m\] "
+  # We are root but check if we're local or remote
+  if [[ -n "${SSH_CLIENT}" || -n "${SSH_TTY}" ]] ; then
+    #red and # prompt plus hostname
+    export PS1="\[\033[38;5;37m\]\A\[\033[38;5;15m\] \[\033[38;5;160m\]\u\[\033[38;5;37m\]@\[\033[38;5;160m\]\h\[\033[38;5;15m\] \[\033[38;5;64m\]\W\[\033[38;5;136m\]\$(__git_ps1 \" (%s)\")\[\033[38;5;245m\] \\$\[\033[00m\] "
+  else
+    # Red and # prompt
+    export PS1="\[\033[38;5;37m\]\A\[\033[38;5;15m\] \[\033[38;5;160m\]\u \[\033[38;5;64m\]\W\[\033[38;5;136m\]\$(__git_ps1 \" (%s)\")\[\033[38;5;245m\] \\$\[\033[00m\] "
+  fi
 else
-  #green and $ prompt
-  export PS1="\[\033[38;5;37m\]\A\[\033[38;5;15m\] \[\033[38;5;33m\]\u\[\033[38;5;37m\]@\[\033[38;5;33m\]\h\[\033[38;5;15m\] \[\033[38;5;64m\]\W\[\033[38;5;136m\]\$(__git_ps1 \" (%s)\")\[\033[38;5;245m\] \\$\[\033[00m\] "
+  # We are not root but check if we're local or remote
+  if [[ -n "${SSH_CLIENT}" || -n "${SSH_TTY}" ]] ; then
+    # Green and $ prompt with hostname
+    export PS1="\[\033[38;5;37m\]\A\[\033[38;5;15m\] \[\033[38;5;33m\]\u\[\033[38;5;37m\]@\[\033[38;5;33m\]\h\[\033[38;5;15m\] \[\033[38;5;64m\]\W\[\033[38;5;136m\]\$(__git_ps1 \" (%s)\")\[\033[38;5;245m\] \\$\[\033[00m\] "
+  else
+    # Green and $ prompt
+    export PS1="\[\033[38;5;37m\]\A\[\033[38;5;15m\] \[\033[38;5;33m\]\u \[\033[38;5;64m\]\W\[\033[38;5;136m\]\$(__git_ps1 \" (%s)\")\[\033[38;5;245m\] \\$\[\033[00m\] "
+  fi
 fi
 
 HAVE_LESS=$(command -v less)
