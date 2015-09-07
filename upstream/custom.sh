@@ -30,27 +30,31 @@ alias mv='mv -i'
 alias rm='rm -i'
 alias which='alias | /usr/bin/which --tty-only --read-alias --show-dot --show-tilde'
 
-#Set terminal colours
+# Set terminal colours
 if [ ${EUID} -eq 0 ] ; then
   # We are root but check if we're local or remote
   if [[ -n "${SSH_CLIENT}" || -n "${SSH_TTY}" ]] ; then
     # Red and # prompt plus hostname
-    export PS1="\[\033[38;5;245m\][\[\033[38;5;33m\]\A\[\033[38;5;15m\] \[\033[38;5;160m\]\u\[\033[38;5;160m\]@\[\033[38;5;160m\]\h\[\033[38;5;15m\] \[\033[38;5;37m\]\W\[\033[38;5;33m\]\$(__git_ps1 \" (%s)\")\[\033[38;5;245m\]]\\$\[\033[00m\] "
+    export PS1="\[\033[38;5;245m\][\[\033[38;5;33m\]\A\[\033[38;5;15m\] \[\033[38;5;160m\]\u\[\033[38;5;160m\]@\[\033[38;5;160m\]\h\[\033[38;5;15m\] \[\033[38;5;37m\]\w\[\033[38;5;33m\]\$(__git_ps1 \" (%s)\")\[\033[38;5;245m\]]\\$\[\033[00m\] "
   else
     # Red and # prompt
-    export PS1="\\[\033[38;5;245m\][\[\033[38;5;33m\]\A\[\033[38;5;15m\] \[\033[38;5;160m\]\u \[\033[38;5;37m\]\W\[\033[38;5;33m\]\$(__git_ps1 \" (%s)\")\[\033[38;5;245m\]]\\$\[\033[00m\] "
+    export PS1="\\[\033[38;5;245m\][\[\033[38;5;33m\]\A\[\033[38;5;15m\] \[\033[38;5;160m\]\u \[\033[38;5;37m\]\w\[\033[38;5;33m\]\$(__git_ps1 \" (%s)\")\[\033[38;5;245m\]]\\$\[\033[00m\] "
   fi
 else
   # We are not root but check if we're local or remote
   if [[ -n "${SSH_CLIENT}" || -n "${SSH_TTY}" ]] ; then
     # Green and $ prompt with hostname
-    export PS1="\[\033[38;5;245m\][\[\033[38;5;33m\]\A\[\033[38;5;15m\] \[\033[38;5;64m\]\u\[\033[38;5;64m\]@\[\033[38;5;64m\]\h\[\033[38;5;15m\] \[\033[38;5;37m\]\W\[\033[38;5;33m\]\$(__git_ps1 \" (%s)\")\[\033[38;5;245m\]]\\$\[\033[00m\] "
+    export PS1="\[\033[38;5;245m\][\[\033[38;5;33m\]\A\[\033[38;5;15m\] \[\033[38;5;64m\]\u\[\033[38;5;64m\]@\[\033[38;5;64m\]\h\[\033[38;5;15m\] \[\033[38;5;37m\]\w\[\033[38;5;33m\]\$(__git_ps1 \" (%s)\")\[\033[38;5;245m\]]\\$\[\033[00m\] "
   else
     # Green and $ prompt
-    export PS1="\[\033[38;5;245m\][\[\033[38;5;33m\]\A\[\033[38;5;15m\] \[\033[38;5;64m\]\u \[\033[38;5;37m\]\W\[\033[38;5;33m\]\$(__git_ps1 \" (%s)\")\[\033[38;5;245m\]]\\$\[\033[00m\] "
+    export PS1="\[\033[38;5;245m\][\[\033[38;5;33m\]\A\[\033[38;5;15m\] \[\033[38;5;64m\]\u \[\033[38;5;37m\]\w\[\033[38;5;33m\]\$(__git_ps1 \" (%s)\")\[\033[38;5;245m\]]\\$\[\033[00m\] "
   fi
 fi
 
+# Set terminal working directory length for use in PS1
+PROMPT_DIRTRIM=2
+
+# Add colours to man pages
 HAVE_LESS=$(command -v less)
 if [ -n "$HAVE_LESS" -a -z "${MANPAGER}" ] ; then
   man() {
