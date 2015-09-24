@@ -65,10 +65,10 @@ fi
 # Check if we're local or remote
 if [[ -n "${SSH_CLIENT}" || -n "${SSH_TTY}" ]] ; then
   # Prompt with hostname
-  export PS1="\[${BASE1}\][\[${BLUE}\]\A\[${RESET}\] \[${USER_COLOUR}\]\u@\h \[${CYAN}\]\w\[${YELLOW}\]\$(__git_ps1 \" (%s)\")\[${BASE1}\]]\\$\[${RESET}\] "
+  export PS1="\[${RESET}\][\[${BASE0}\]\A\[${RESET}\] \[${USER_COLOUR}\]\u@\h \[${CYAN}\]\w\[${YELLOW}\]\$(__git_ps1 \" (%s)\")\[${RESET}\]]\\$\[${RESET}\] "
 else
   # Just prompt
-  export PS1="\[${BASE1}\][\[${BLUE}\]\A\[${RESET}\] \[${USER_COLOUR}\]\u \[${CYAN}\]\w\[${YELLOW}\]\$(__git_ps1 \" (%s)\")\[${BASE1}\]]\\$\[${RESET}\] "
+  export PS1="\[${RESET}\][\[${BASE0}\]\A\[${RESET}\] \[${USER_COLOUR}\]\u \[${CYAN}\]\w\[${YELLOW}\]\$(__git_ps1 \" (%s)\")\[${RESET}\]]\\$\[${RESET}\] "
 fi
 
 # Set terminal working directory length for use in PS1
