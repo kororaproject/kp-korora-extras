@@ -3,7 +3,7 @@
 Summary:        Korora Extras
 Name:           korora-extras
 Version:        0.11
-Release:        2%{?dist}.1
+Release:        3%{?dist}
 Source0:        %{name}-%{version}.tar.gz
 License:        GPLv3+
 Group:          System Environment/Base
@@ -99,6 +99,10 @@ fi
 #/etc/skel/Desktop/README.pdf
 
 %changelog
+* Thu Sep 24 2015 Chris Smart <csmart@kororaproject.org> 0.11-3
+- Only run custom.sh if our shell is bash, else we brake zsh if there's no ~/.zshrc
+- Update PS1 to use colour variables and reduce complexity checks for root.
+
 * Mon Sep 7 2015 Chris Smart <csmart@kororaproject.org> 0.11-2
 - Only show hostname on terminal PS1 when we are connected via SSH
 

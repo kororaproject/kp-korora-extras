@@ -32,7 +32,7 @@
 # - See table below to see the assignments.
 
 
-# Insatllation instructions:
+# Installation instructions:
 # This file goes in the /etc directory, and must be world readable.
 # You can copy this file to .dir_colors in your $HOME directory to override
 # the system defaults.
@@ -97,6 +97,7 @@ TERM screen-256color-bce-s
 TERM screen-256color-italic
 TERM screen-bce
 TERM screen-w
+TERM screen.xterm-256color
 TERM screen.linux
 TERM screen.xterm-new
 TERM st
@@ -214,6 +215,7 @@ EXEC 01;31  # Unix
 .cxx 32
 .objc 32
 .sh 32
+.bash 32
 .csh 32
 .zsh 32
 .el 32
@@ -255,6 +257,7 @@ EXEC 01;31  # Unix
 .pod 32
 .tex 32
 .go 32
+.sql 32
 
 ### Multimedia formats
 
@@ -344,106 +347,112 @@ EXEC 01;31  # Unix
 .doc 31
 .docx 31
 .rtf 31
+.odt 31
 .dot 31
 .dotx 31
+.ott 31
 .xls 31
 .xlsx 31
+.ods 31
+.ots 31
 .ppt 31
 .pptx 31
+.odp 31
+.otp 31
 .fla 31
 .psd 31
 
 # Archives, compressed
-.7z   0;35
-.apk  0;35
-.arj  0;35
-.bin  0;35
-.bz   0;35
-.bz2  0;35
-.cab  0;35  # Win
-.deb  0;35
-.dmg  0;35  # OSX
-.gem  0;35
-.gz   0;35
-.iso  0;35
-.jar  0;35
-.msi  0;35  # Win
-.rar  0;35
-.rpm  0;35
-.tar  0;35
-.tbz  0;35
-.tbz2 0;35
-.tgz  0;35
-.tx   0;35
-.war  0;35
-.xpi  0;35
-.xz   0;35
-.z    0;35
-.Z    0;35
-.zip  0;35
+.7z   1;35
+.apk  1;35
+.arj  1;35
+.bin  1;35
+.bz   1;35
+.bz2  1;35
+.cab  1;35  # Win
+.deb  1;35
+.dmg  1;35  # OSX
+.gem  1;35
+.gz   1;35
+.iso  1;35
+.jar  1;35
+.msi  1;35  # Win
+.rar  1;35
+.rpm  1;35
+.tar  1;35
+.tbz  1;35
+.tbz2 1;35
+.tgz  1;35
+.tx   1;35
+.war  1;35
+.xpi  1;35
+.xz   1;35
+.z    1;35
+.Z    1;35
+.zip  1;35
 
 # For testing
 .ANSI-30-black 30
-.ANSI-00;30-brblack 00;30
+.ANSI-01;30-brblack 01;30
 .ANSI-31-red 31
-.ANSI-00;31-brred 00;31
+.ANSI-01;31-brred 01;31
 .ANSI-32-green 32
-.ANSI-00;32-brgreen 00;32
+.ANSI-01;32-brgreen 01;32
 .ANSI-33-yellow 33
-.ANSI-00;33-bryellow 00;33
+.ANSI-01;33-bryellow 01;33
 .ANSI-34-blue 34
-.ANSI-00;34-brblue 00;34
+.ANSI-01;34-brblue 01;34
 .ANSI-35-magenta 35
-.ANSI-00;35-brmagenta 00;35
+.ANSI-01;35-brmagenta 01;35
 .ANSI-36-cyan 36
-.ANSI-00;36-brcyan 00;36
+.ANSI-01;36-brcyan 01;36
 .ANSI-37-white 37
-.ANSI-00;37-brwhite 00;37
+.ANSI-01;37-brwhite 01;37
 
 #############################################################################
 # Your customizations
 
 # Unimportant text files
-# For universal scheme, use brightgreen 00;32
-# For optimal on light bg (but too prominent on dark bg), use white 00;34
-.log 00;32
-*~ 00;32
-*# 00;32
-#.log 00;34
-#*~ 00;34
-#*# 00;34
+# For universal scheme, use brightgreen 01;32
+# For optimal on light bg (but too prominent on dark bg), use white 01;34
+.log 01;32
+*~ 01;32
+*# 01;32
+#.log 01;34
+#*~ 01;34
+#*# 01;34
 
 # Unimportant non-text files
-# For universal scheme, use brightcyan 00;36
-# For optimal on dark bg (but too prominent on light bg), change to 00;33
-.bak 00;36
-.BAK 00;36
-.old 00;36
-.OLD 00;36
-.org_archive 00;36
-.off 00;36
-.OFF 00;36
-.dist 00;36
-.DIST 00;36
-.orig 00;36
-.ORIG 00;36
-.swp 00;36
-.swo 00;36
-*,v 00;36
-#.bak 00;33
-#.BAK 00;33
-#.old 00;33
-#.OLD 00;33
-#.org_archive 00;33
-#.off 00;33
-#.OFF 00;33
-#.dist 00;33
-#.DIST 00;33
-#.orig 00;33
-#.ORIG 00;33
-#.swp 00;33
-#.swo 00;33
-#*,v 00;33
+# For universal scheme, use brightcyan 01;36
+# For optimal on dark bg (but too prominent on light bg), change to 01;33
+.bak 01;36
+.BAK 01;36
+.old 01;36
+.OLD 01;36
+.org_archive 01;36
+.off 01;36
+.OFF 01;36
+.dist 01;36
+.DIST 01;36
+.orig 01;36
+.ORIG 01;36
+.swp 01;36
+.swo 01;36
+*,v 01;36
+#.bak 01;33
+#.BAK 01;33
+#.old 01;33
+#.OLD 01;33
+#.org_archive 01;33
+#.off 01;33
+#.OFF 01;33
+#.dist 01;33
+#.DIST 01;33
+#.orig 01;33
+#.ORIG 01;33
+#.swp 01;33
+#.swo 01;33
+#*,v 01;33
 
 # The brightmagenta (Solarized: purple) color is free for you to use for your
 # custom file type

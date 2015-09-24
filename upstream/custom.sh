@@ -1,10 +1,15 @@
+# only run this for bash
+if [ "$BASH" != "$(which bash)" ]; then
+  return
+fi
+
 # Source for git information in prompt
 if [ -f /usr/share/doc/git/contrib/completion/git-prompt.sh ]; then
   source /usr/share/doc/git/contrib/completion/git-prompt.sh
   GIT_PS1_SHOWDIRTYSTATE=1
   GIT_PS1_SHOWSTASHSTATE=1
   GIT_PS1_SHOWUNTRACKEDFILES=1
-  GIT_PS1_SHOWUPSTREAM="verbose legacy git"
+#  GIT_PS1_SHOWUPSTREAM="verbose legacy git"
   GIT_PS1_DESCRIBE_STYLE=default
 #  GIT_PS1_SHOWCOLORHINTS=1
 else
@@ -31,24 +36,39 @@ alias rm='rm -i'
 alias which='alias | /usr/bin/which --tty-only --read-alias --show-dot --show-tilde'
 
 # Set terminal colours
+BASE03=$(tput setaf 234)
+BASE02=$(tput setaf 235)
+BASE01=$(tput setaf 240)
+BASE00=$(tput setaf 241)
+BASE0=$(tput setaf 244)
+BASE1=$(tput setaf 245)
+BASE2=$(tput setaf 254)
+BASE3=$(tput setaf 230)
+YELLOW=$(tput setaf 136)
+ORANGE=$(tput setaf 166)
+RED=$(tput setaf 160)
+MAGENTA=$(tput setaf 125)
+VIOLET=$(tput setaf 61)
+BLUE=$(tput setaf 33)
+CYAN=$(tput setaf 37)
+GREEN=$(tput setaf 64)
+BOLD=$(tput bold)
+RESET=$(tput sgr0)
+
+# If we're root, then let's see red
 if [ ${EUID} -eq 0 ] ; then
-  # We are root but check if we're local or remote
-  if [[ -n "${SSH_CLIENT}" || -n "${SSH_TTY}" ]] ; then
-    # Red and # prompt plus hostname
-    export PS1="\[\033[38;5;245m\][\[\033[38;5;33m\]\A\[\033[38;5;15m\] \[\033[38;5;160m\]\u\[\033[38;5;160m\]@\[\033[38;5;160m\]\h\[\033[38;5;15m\] \[\033[38;5;37m\]\w\[\033[38;5;136m\]\$(__git_ps1 \" (%s)\")\[\033[38;5;245m\]]\\$\[\033[00m\] "
-  else
-    # Red and # prompt
-    export PS1="\\[\033[38;5;245m\][\[\033[38;5;33m\]\A\[\033[38;5;15m\] \[\033[38;5;160m\]\u \[\033[38;5;37m\]\w\[\033[38;5;136m\]\$(__git_ps1 \" (%s)\")\[\033[38;5;245m\]]\\$\[\033[00m\] "
-  fi
+  USER_COLOUR="${RED}"
 else
-  # We are not root but check if we're local or remote
-  if [[ -n "${SSH_CLIENT}" || -n "${SSH_TTY}" ]] ; then
-    # Green and $ prompt with hostname
-    export PS1="\[\033[38;5;245m\][\[\033[38;5;33m\]\A\[\033[38;5;15m\] \[\033[38;5;64m\]\u\[\033[38;5;64m\]@\[\033[38;5;64m\]\h\[\033[38;5;15m\] \[\033[38;5;37m\]\w\[\033[38;5;136m\]\$(__git_ps1 \" (%s)\")\[\033[38;5;245m\]]\\$\[\033[00m\] "
-  else
-    # Green and $ prompt
-    export PS1="\[\033[38;5;245m\][\[\033[38;5;33m\]\A\[\033[38;5;15m\] \[\033[38;5;64m\]\u \[\033[38;5;37m\]\w\[\033[38;5;136m\]\$(__git_ps1 \" (%s)\")\[\033[38;5;245m\]]\\$\[\033[00m\] "
-  fi
+  USER_COLOUR="${GREEN}"
+fi
+
+# Check if we're local or remote
+if [[ -n "${SSH_CLIENT}" || -n "${SSH_TTY}" ]] ; then
+  # Prompt with hostname
+  export PS1="\[${BASE1}\][\[${BLUE}\]\A\[${RESET}\] \[${USER_COLOUR}\]\u@\h \[${CYAN}\]\w\[${YELLOW}\]\$(__git_ps1 \" (%s)\")\[${BASE1}\]]\\$\[${RESET}\] "
+else
+  # Just prompt
+  export PS1="\[${BASE1}\][\[${BLUE}\]\A\[${RESET}\] \[${USER_COLOUR}\]\u \[${CYAN}\]\w\[${YELLOW}\]\$(__git_ps1 \" (%s)\")\[${BASE1}\]]\\$\[${RESET}\] "
 fi
 
 # Set terminal working directory length for use in PS1
@@ -58,7 +78,7 @@ PROMPT_DIRTRIM=2
 HAVE_LESS=$(command -v less)
 if [ -n "$HAVE_LESS" -a -z "${MANPAGER}" ] ; then
   man() {
-      env LESS_TERMCAP_mb=$(printf "\e[1;31m") \
+    env LESS_TERMCAP_mb=$(printf "\e[1;31m") \
       LESS_TERMCAP_md=$(printf "\e[38;5;33m") \
       LESS_TERMCAP_me=$(printf "\e[0m") \
       LESS_TERMCAP_se=$(printf "\e[0m") \
