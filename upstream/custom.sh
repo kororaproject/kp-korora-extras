@@ -1,5 +1,5 @@
 # only run this for bash
-if [ "$BASH" != "$(which bash)" ]; then
+if [ "$BASH" != "$(which bash)" -a "$BASH" != "/bin/bash" -a "$BASH" != "/usr/bin/bash" ]; then
   return
 fi
 
