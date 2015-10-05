@@ -4,8 +4,8 @@ if [ "$BASH" != "$(which bash)" ]; then
 fi
 
 # Source for git information in prompt
-if [ -f /usr/share/doc/git/contrib/completion/git-prompt.sh ]; then
-  source /usr/share/doc/git/contrib/completion/git-prompt.sh
+if [ -f /usr/share/git-core/contrib/completion/git-prompt.sh ]; then
+  source /usr/share/git-core/contrib/completion/git-prompt.sh
   GIT_PS1_SHOWDIRTYSTATE=1
   GIT_PS1_SHOWSTASHSTATE=1
   GIT_PS1_SHOWUNTRACKEDFILES=1

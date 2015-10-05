@@ -3,7 +3,7 @@
 Summary:        Korora Extras
 Name:           korora-extras
 Version:        0.11
-Release:        3%{?dist}
+Release:        3%{?dist}.2
 Source0:        %{name}-%{version}.tar.gz
 License:        GPLv3+
 Group:          System Environment/Base
