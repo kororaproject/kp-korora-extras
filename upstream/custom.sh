@@ -13,7 +13,7 @@ if [ -f /usr/share/git-core/contrib/completion/git-prompt.sh ]; then
   GIT_PS1_DESCRIBE_STYLE=default
 #  GIT_PS1_SHOWCOLORHINTS=1
 else
-  __git_ps1
+  __git_ps1()
   {
     : # Git is not installed so stub out function
   }
