@@ -3,12 +3,11 @@
 Summary:        Korora Extras
 Name:           korora-extras
 Version:        0.11
-Release:        3%{?dist}.3
+Release:        3%{?dist}.4
 Source0:        %{name}-%{version}.tar.gz
 License:        GPLv3+
 Group:          System Environment/Base
 Requires:       korora-release
-Requires(post): yum
 BuildRequires:  policycoreutils libselinux
 Obsoletes:      kororaa-extras
 Provides:       kororaa-extras
@@ -59,27 +58,27 @@ ln -sf /usr/share/fontconfig/conf.avail/10-autohint.conf %{buildroot}/etc/fonts/
 
 %post
 #Only do this on first install, not upgrades
-if [ "$1" == "1" ]
-then
+#if [ "$1" == "1" ]
+#then
   #Create vboxusers group
-  groupadd -r vboxusers 2>/dev/null
+#  groupadd -r vboxusers 2>/dev/null
 
   #/sbin/restorecon '/var/lib/polkit-1/localauthority/50-local.d/10-korora-overrides.pkla'
 
   #Set installonly limit in yum.conf
-  if [ -z "$(grep installonly_limit=2 /etc/yum.conf)" ]
-  then
-    sed -i 's/^installonly_limit=.*/installonly_limit=2/g' /etc/yum.conf
-  fi
+#  if [ -z "$(grep installonly_limit=2 /etc/yum.conf)" ]
+#  then
+#    sed -i 's/^installonly_limit=.*/installonly_limit=2/g' /etc/yum.conf
+#  fi
 
-  #Set clean_requirements_on_remove in yum.conf
-  if [ -z "$(grep clean_requirements_on_remove /etc/yum.conf)" ]
-  then
-    sed -i '/^installonly_limit=.*/ a clean_requirements_on_remove=1' /etc/yum.conf
-  else
-    sed -i 's/^clean_requirements_on_remove=.*/clean_requirements_on_remove=1/g' /etc/yum.conf
-  fi
-fi
+#  #Set clean_requirements_on_remove in yum.conf
+#  if [ -z "$(grep clean_requirements_on_remove /etc/yum.conf)" ]
+#  then
+#    sed -i '/^installonly_limit=.*/ a clean_requirements_on_remove=1' /etc/yum.conf
+#  else
+#    sed -i 's/^clean_requirements_on_remove=.*/clean_requirements_on_remove=1/g' /etc/yum.conf
+#  fi
+#fi
 
 %postun
 
