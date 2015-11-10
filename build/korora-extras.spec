@@ -46,7 +46,7 @@ install -m 0644 %{_builddir}/%{name}-%{version}/dircolors.ansi-universal %{build
 #removing this custom.sh because this goes under profile.d instead and I was lazy above and copied all shell scripts to bin
 #rm %{buildroot}%{_bindir}/custom.sh
 install -m 0644 %{_builddir}/%{name}-%{version}/10-korora-policy.rules %{buildroot}%{_datadir}/polkit-1/rules.d/10-korora-policy.rules
-cp -a %{_builddir}/%{name}-%{version}/adblockplus %{buildroot}/%{_libdir}/firefox/browser/defaults/profile/
+#cp -a %{_builddir}/%{name}-%{version}/adblockplus %{buildroot}/%{_libdir}/firefox/browser/defaults/profile/
 #for x in Text.txt Image.png Presentation.odp Spreadsheet.ods Document.odt ; do touch %{buildroot}%{_sysconfdir}/skel/Templates/$x ; done
 cp -a %{_builddir}/%{name}-%{version}/Templates %{buildroot}%{_sysconfdir}/skel/
 /sbin/restorecon %{buildroot}%{_sharedstatedir}/polkit-1/localauthority/50-local.d/10-korora-overrides.pkla
@@ -92,7 +92,7 @@ ln -sf /usr/share/fontconfig/conf.avail/10-autohint.conf %{buildroot}/etc/fonts/
 %{_sysconfdir}/profile.d/custom.sh
 %{_datadir}/%{name}/dircolors.ansi-universal
 %{_datadir}/polkit-1/rules.d/10-korora-policy.rules
-%{_libdir}/firefox/browser/defaults/profile/adblockplus/
+#%{_libdir}/firefox/browser/defaults/profile/adblockplus/
 %{_sysconfdir}/fonts/conf.d/10-autohint.conf
 %{_libdir}/firefox/browser/defaults/profile/prefs.js
 #/etc/skel/Desktop/README.pdf
