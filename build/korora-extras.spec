@@ -3,7 +3,7 @@
 Summary:        Korora Extras
 Name:           korora-extras
 Version:        0.11
-Release:        3%{?dist}.5
+Release:        4%{?dist}
 Source0:        %{name}-%{version}.tar.gz
 License:        GPLv3+
 Group:          System Environment/Base
@@ -98,6 +98,10 @@ ln -sf /usr/share/fontconfig/conf.avail/10-autohint.conf %{buildroot}/etc/fonts/
 #/etc/skel/Desktop/README.pdf
 
 %changelog
+* Sun Nov 15 2015 Chris Smart <csmart@kororaproject.org> 0.11-4
+- Remove adblock-plus settings, now that we ship ublock origin.
+- Thanks @exif.
+
 * Thu Sep 24 2015 Chris Smart <csmart@kororaproject.org> 0.11-3
 - Only run custom.sh if our shell is bash, else we brake zsh if there's no ~/.zshrc
 - Update PS1 to use colour variables and reduce complexity checks for root.
