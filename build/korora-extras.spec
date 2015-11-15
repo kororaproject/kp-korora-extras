@@ -28,6 +28,7 @@ mkdir -p %{buildroot}%{_sysconfdir}/cron.hourly
 mkdir -p %{buildroot}%{_sysconfdir}/fonts/conf.d
 #mkdir -p %{buildroot}%{_sysconfdir}/sudoers.d
 mkdir -p %{buildroot}%{_sysconfdir}/profile.d
+mkdir -p %{buildroot}%{_sysconfdir}/sysctl.d
 mkdir -p %{buildroot}%{_datadir}/polkit-1/rules.d
 mkdir -p %{buildroot}%{_datadir}/%{name}
 mkdir -p %{buildroot}%{_bindir}
@@ -53,6 +54,9 @@ cp -a %{_builddir}/%{name}-%{version}/Templates %{buildroot}%{_sysconfdir}/skel/
 
 #Set up system-wide hinting
 ln -sf /usr/share/fontconfig/conf.avail/10-autohint.conf %{buildroot}/etc/fonts/conf.d/
+
+# Disable coredumps
+ln -sf /dev/null %{buildroot}%{_sysconfdir}/sysctl.d/50-coredump.conf
 
 %posttrans
 
@@ -88,6 +92,7 @@ ln -sf /usr/share/fontconfig/conf.avail/10-autohint.conf %{buildroot}/etc/fonts/
 %{_sysconfdir}/cron.hourly/fstrim
 %{_sysconfdir}/skel/.vimrc
 %{_sysconfdir}/skel/Templates/*
+%{_sysconfdir}/sysctl.d/50-coredump.conf
 #%{_sysconfdir}/sudoers.d/01_korora
 %{_sysconfdir}/profile.d/custom.sh
 %{_datadir}/%{name}/dircolors.ansi-universal
@@ -101,6 +106,7 @@ ln -sf /usr/share/fontconfig/conf.avail/10-autohint.conf %{buildroot}/etc/fonts/
 * Sun Nov 15 2015 Chris Smart <csmart@kororaproject.org> 0.11-4
 - Remove adblock-plus settings, now that we ship ublock origin.
 - Thanks @exif.
+- Disable coredumps by default, not really useful for our users.
 
 * Thu Sep 24 2015 Chris Smart <csmart@kororaproject.org> 0.11-3
 - Only run custom.sh if our shell is bash, else we brake zsh if there's no ~/.zshrc
