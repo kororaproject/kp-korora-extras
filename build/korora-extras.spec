@@ -24,7 +24,7 @@ such as pretty bash shell, policykit overrides, vimrc, etc.
 %install
 #mkdir -p %{buildroot}%{_sysconfdir}/yum.repos.d
 mkdir -p %{buildroot}%{_sysconfdir}/skel/Desktop
-mkdir -p %{buildroot}%{_sysconfdir}/cron.hourly
+#mkdir -p %{buildroot}%{_sysconfdir}/cron.hourly
 mkdir -p %{buildroot}%{_sysconfdir}/fonts/conf.d
 #mkdir -p %{buildroot}%{_sysconfdir}/sudoers.d
 mkdir -p %{buildroot}%{_sysconfdir}/profile.d
@@ -37,7 +37,7 @@ mkdir -p %{buildroot}%{_libdir}/firefox/browser/defaults/profile
 cp -a %{_builddir}/%{name}-%{version}/prefs.js %{buildroot}%{_libdir}/firefox/browser/defaults/profile/prefs.js
 
 #cp -a %{_builddir}/%{name}-%{version}/*repo %{buildroot}%{_sysconfdir}/yum.repos.d/
-install -m 0755 %{_builddir}/%{name}-%{version}/fstrim %{buildroot}%{_sysconfdir}/cron.hourly/fstrim
+#install -m 0755 %{_builddir}/%{name}-%{version}/fstrim %{buildroot}%{_sysconfdir}/cron.hourly/fstrim
 install -m 0755 %{_builddir}/%{name}-%{version}/vimrc %{buildroot}%{_sysconfdir}/skel/.vimrc
 #cp -a %{_builddir}/%{name}-%{version}/01_korora %{buildroot}%{_sysconfdir}/sudoers.d/
 install -m 0755 %{_builddir}/%{name}-%{version}/custom.sh %{buildroot}%{_sysconfdir}/profile.d/custom.sh
@@ -89,7 +89,7 @@ ln -sf /dev/null %{buildroot}%{_sysconfdir}/sysctl.d/50-coredump.conf
 %files
 %defattr(-,root,root)
 #%{_sysconfdir}/yum.repos.d/*repo
-%{_sysconfdir}/cron.hourly/fstrim
+#%{_sysconfdir}/cron.hourly/fstrim
 %{_sysconfdir}/skel/.vimrc
 %{_sysconfdir}/skel/Templates/*
 %{_sysconfdir}/sysctl.d/50-coredump.conf
@@ -103,6 +103,9 @@ ln -sf /dev/null %{buildroot}%{_sysconfdir}/sysctl.d/50-coredump.conf
 #/etc/skel/Desktop/README.pdf
 
 %changelog
+* Wed Nov 18 2015 Chris Smart <csmart@kororaproject.org> 0.11-5
+- Remove fstrim cron job - use systemd fstrim.timer instead
+
 * Sun Nov 15 2015 Chris Smart <csmart@kororaproject.org> 0.11-4
 - Remove adblock-plus settings, now that we ship ublock origin.
 - Thanks @exif.
