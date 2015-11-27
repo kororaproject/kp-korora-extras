@@ -1,7 +1,8 @@
-# only run this for bash
+# only run this for interactive bash
 if [ "$BASH" != "$(which bash)" -a "$BASH" != "/bin/bash" -a "$BASH" != "/usr/bin/bash" ]; then
   return
 fi
+tty -s || return
 
 # Source for git information in prompt
 if [ -f /usr/share/git-core/contrib/completion/git-prompt.sh ]; then
@@ -20,7 +21,7 @@ else
 fi
 
 #Turn off annoying blinking if interactive
-tty -s && [ $TERM != "xterm" ] && setterm --blength 0 2>/dev/null
+[ $TERM != "xterm" ] && setterm --blength 0 2>/dev/null
 
 #Set aliases
 alias cp='cp -i'
