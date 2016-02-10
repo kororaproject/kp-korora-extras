@@ -3,7 +3,7 @@
 Summary:        Korora Extras
 Name:           korora-extras
 Version:        0.12
-Release:        1%{?dist}
+Release:        1%{?dist}.1
 Source0:        %{name}-%{version}.tar.gz
 License:        GPLv3+
 Group:          System Environment/Base
@@ -54,7 +54,7 @@ install -m 0644 %{_builddir}/%{name}-%{version}/10-korora-policy.rules %{buildro
 cp -a %{_builddir}/%{name}-%{version}/Templates %{buildroot}%{_sysconfdir}/skel/
 /sbin/restorecon %{buildroot}%{_sharedstatedir}/polkit-1/localauthority/50-local.d/10-korora-overrides.pkla
 
-install -m 0644 dconf_user %{buildroot}%{_sysconfdir}/dconf/profile
+install -m 0644 dconf_user %{buildroot}%{_sysconfdir}/dconf/profile/user
 
 #Set up system-wide hinting
 ln -sf /usr/share/fontconfig/conf.avail/10-autohint.conf %{buildroot}/etc/fonts/conf.d/
@@ -107,7 +107,7 @@ dconf update
 %{_sysconfdir}/fonts/conf.d/10-autohint.conf
 %{_libdir}/firefox/browser/defaults/profile/prefs.js
 #/etc/skel/Desktop/README.pdf
-%{_sysconfdir}/dconf/profile
+%{_sysconfdir}/dconf/profile/user
 
 %changelog
 * Wed Feb 10 2016 Chris Smart <csmart@kororaproject.org> 0.12-1
