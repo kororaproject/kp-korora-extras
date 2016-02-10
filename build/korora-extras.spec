@@ -2,13 +2,14 @@
 
 Summary:        Korora Extras
 Name:           korora-extras
-Version:        0.11
-Release:        4%{?dist}
+Version:        0.12
+Release:        1%{?dist}
 Source0:        %{name}-%{version}.tar.gz
 License:        GPLv3+
 Group:          System Environment/Base
 Requires:       korora-release
 BuildRequires:  policycoreutils libselinux
+Requires(post): dconf
 Obsoletes:      kororaa-extras
 Provides:       kororaa-extras
 
@@ -29,6 +30,7 @@ mkdir -p %{buildroot}%{_sysconfdir}/fonts/conf.d
 #mkdir -p %{buildroot}%{_sysconfdir}/sudoers.d
 mkdir -p %{buildroot}%{_sysconfdir}/profile.d
 mkdir -p %{buildroot}%{_sysconfdir}/sysctl.d
+mkdir -p %{buildroot}%{_sysconfdir}/dconf/profile
 mkdir -p %{buildroot}%{_datadir}/polkit-1/rules.d
 mkdir -p %{buildroot}%{_datadir}/%{name}
 mkdir -p %{buildroot}%{_bindir}
@@ -51,6 +53,8 @@ install -m 0644 %{_builddir}/%{name}-%{version}/10-korora-policy.rules %{buildro
 #for x in Text.txt Image.png Presentation.odp Spreadsheet.ods Document.odt ; do touch %{buildroot}%{_sysconfdir}/skel/Templates/$x ; done
 cp -a %{_builddir}/%{name}-%{version}/Templates %{buildroot}%{_sysconfdir}/skel/
 /sbin/restorecon %{buildroot}%{_sharedstatedir}/polkit-1/localauthority/50-local.d/10-korora-overrides.pkla
+
+install -m 0644 dconf_user %{buildroot}%{_sysconfdir}/dconf/profile
 
 #Set up system-wide hinting
 ln -sf /usr/share/fontconfig/conf.avail/10-autohint.conf %{buildroot}/etc/fonts/conf.d/
@@ -84,6 +88,8 @@ ln -sf /dev/null %{buildroot}%{_sysconfdir}/sysctl.d/50-coredump.conf
 #  fi
 #fi
 
+dconf update
+
 %postun
 
 %files
@@ -101,8 +107,12 @@ ln -sf /dev/null %{buildroot}%{_sysconfdir}/sysctl.d/50-coredump.conf
 %{_sysconfdir}/fonts/conf.d/10-autohint.conf
 %{_libdir}/firefox/browser/defaults/profile/prefs.js
 #/etc/skel/Desktop/README.pdf
+%{_sysconfdir}/dconf/profile
 
 %changelog
+* Wed Feb 10 2016 Chris Smart <csmart@kororaproject.org> 0.12-1
+- Install a dconf userdb file
+
 * Wed Nov 18 2015 Chris Smart <csmart@kororaproject.org> 0.11-5
 - Remove fstrim cron job - use systemd fstrim.timer instead
 
