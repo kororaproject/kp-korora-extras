@@ -2,8 +2,8 @@
 
 Summary:        Korora Extras
 Name:           korora-extras
-Version:        0.12
-Release:        1%{?dist}.1
+Version:        0.13
+Release:        1%{?dist}
 Source0:        %{name}-%{version}.tar.gz
 License:        GPLv3+
 Group:          System Environment/Base
@@ -110,6 +110,9 @@ dconf update
 %{_sysconfdir}/dconf/profile/user
 
 %changelog
+* Thu May 12 2016 Chris Smart <csmart@kororaproject.org> 0.13-1
+- Korora 24
+
 * Wed Feb 10 2016 Chris Smart <csmart@kororaproject.org> 0.12-1
 - Install a dconf userdb file
 
