@@ -51,7 +51,8 @@ install -m 0644 %{_builddir}/%{name}-%{version}/dircolors.ansi-universal %{build
 install -m 0644 %{_builddir}/%{name}-%{version}/10-korora-policy.rules %{buildroot}%{_datadir}/polkit-1/rules.d/10-korora-policy.rules
 #cp -a %{_builddir}/%{name}-%{version}/adblockplus %{buildroot}/%{_libdir}/firefox/browser/defaults/profile/
 #for x in Text.txt Image.png Presentation.odp Spreadsheet.ods Document.odt ; do touch %{buildroot}%{_sysconfdir}/skel/Templates/$x ; done
-cp -a %{_builddir}/%{name}-%{version}/Templates %{buildroot}%{_sysconfdir}/skel/
+# templates this doesn't work with other languages
+#cp -a %{_builddir}/%{name}-%{version}/Templates %{buildroot}%{_sysconfdir}/skel/
 /sbin/restorecon %{buildroot}%{_sharedstatedir}/polkit-1/localauthority/50-local.d/10-korora-overrides.pkla
 
 install -m 0644 dconf_user %{buildroot}%{_sysconfdir}/dconf/profile/user
@@ -97,7 +98,7 @@ dconf update
 #%{_sysconfdir}/yum.repos.d/*repo
 #%{_sysconfdir}/cron.hourly/fstrim
 %{_sysconfdir}/skel/.vimrc
-%{_sysconfdir}/skel/Templates/*
+#%{_sysconfdir}/skel/Templates/*
 %{_sysconfdir}/sysctl.d/50-coredump.conf
 #%{_sysconfdir}/sudoers.d/01_korora
 %{_sysconfdir}/profile.d/custom.sh
