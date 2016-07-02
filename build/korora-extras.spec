@@ -3,7 +3,7 @@
 Summary:        Korora Extras
 Name:           korora-extras
 Version:        0.13
-Release:        2%{?dist}
+Release:        2%{?dist}.1
 Source0:        %{name}-%{version}.tar.gz
 License:        GPLv3+
 Group:          System Environment/Base
@@ -35,6 +35,8 @@ mkdir -p %{buildroot}%{_datadir}/polkit-1/rules.d
 mkdir -p %{buildroot}%{_datadir}/%{name}
 mkdir -p %{buildroot}%{_bindir}
 mkdir -p %{buildroot}%{_libdir}/firefox/browser/defaults/preferences
+mkdir -p %{buildroot}%{_sysconfdir}/dconf/db/local.d
+
 
 install -m 644 %{_builddir}/%{name}-%{version}/firefox-korora-default-prefs.js %{buildroot}%{_libdir}/firefox/browser/defaults/preferences/firefox-korora-default-prefs.js
 install -m 644 %{_builddir}/%{name}-%{version}/firefox-arc-theme-default-prefs.js %{buildroot}%{_libdir}/firefox/browser/defaults/preferences/firefox-arc-theme-default-prefs.js
@@ -63,6 +65,9 @@ ln -sf /usr/share/fontconfig/conf.avail/10-autohint.conf %{buildroot}/etc/fonts/
 
 # Disable coredumps
 ln -sf /dev/null %{buildroot}%{_sysconfdir}/sysctl.d/50-coredump.conf
+
+# plank config
+install -m 0644 00_korora_plank %{buildroot}%{_sysconfdir}/dconf/db/local.d/00_korora_plank
 
 %posttrans
 
@@ -94,6 +99,8 @@ dconf update
 
 %postun
 
+dconf update
+
 %files
 %defattr(-,root,root)
 #%{_sysconfdir}/yum.repos.d/*repo
@@ -111,10 +118,12 @@ dconf update
 %{_libdir}/firefox/browser/defaults/preferences/firefox-arc-theme-default-prefs.js
 #/etc/skel/Desktop/README.pdf
 %{_sysconfdir}/dconf/profile/user
+%{_sysconfdir}/dconf/db/local.d/00_korora_plank
 
 %changelog
 * Sat Jul 02 2016 Chris Smart <csmart@kororaproject.org> 0.13-2
 - Fix firefox preferences
+- Global plank preferences
 
 * Thu May 12 2016 Chris Smart <csmart@kororaproject.org> 0.13-1
 - Korora 24
