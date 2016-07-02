@@ -37,6 +37,7 @@ mkdir -p %{buildroot}%{_bindir}
 mkdir -p %{buildroot}%{_libdir}/firefox/browser/defaults/preferences
 
 install -m 644 %{_builddir}/%{name}-%{version}/firefox-korora-default-prefs.js %{buildroot}%{_libdir}/firefox/browser/defaults/preferences/firefox-korora-default-prefs.js
+install -m 644 %{_builddir}/%{name}-%{version}/firefox-arc-theme-default-prefs.js %{buildroot}%{_libdir}/firefox/browser/defaults/preferences/firefox-arc-theme-default-prefs.js
 
 #cp -a %{_builddir}/%{name}-%{version}/*repo %{buildroot}%{_sysconfdir}/yum.repos.d/
 #install -m 0755 %{_builddir}/%{name}-%{version}/fstrim %{buildroot}%{_sysconfdir}/cron.hourly/fstrim
@@ -107,6 +108,7 @@ dconf update
 #%{_libdir}/firefox/browser/defaults/profile/adblockplus/
 %{_sysconfdir}/fonts/conf.d/10-autohint.conf
 %{_libdir}/firefox/browser/defaults/preferences/firefox-korora-default-prefs.js
+%{_libdir}/firefox/browser/defaults/preferences/firefox-arc-theme-default-prefs.js
 #/etc/skel/Desktop/README.pdf
 %{_sysconfdir}/dconf/profile/user
 
