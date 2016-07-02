@@ -3,7 +3,7 @@
 Summary:        Korora Extras
 Name:           korora-extras
 Version:        0.13
-Release:        1%{?dist}
+Release:        2%{?dist}
 Source0:        %{name}-%{version}.tar.gz
 License:        GPLv3+
 Group:          System Environment/Base
@@ -34,9 +34,9 @@ mkdir -p %{buildroot}%{_sysconfdir}/dconf/profile
 mkdir -p %{buildroot}%{_datadir}/polkit-1/rules.d
 mkdir -p %{buildroot}%{_datadir}/%{name}
 mkdir -p %{buildroot}%{_bindir}
-mkdir -p %{buildroot}%{_libdir}/firefox/browser/defaults/profile
+mkdir -p %{buildroot}%{_libdir}/firefox/browser/defaults/preferences
 
-cp -a %{_builddir}/%{name}-%{version}/prefs.js %{buildroot}%{_libdir}/firefox/browser/defaults/profile/prefs.js
+install -m 644 %{_builddir}/%{name}-%{version}/firefox-korora-default-prefs.js %{buildroot}%{_libdir}/firefox/browser/defaults/preferences/firefox-korora-default-prefs.js
 
 #cp -a %{_builddir}/%{name}-%{version}/*repo %{buildroot}%{_sysconfdir}/yum.repos.d/
 #install -m 0755 %{_builddir}/%{name}-%{version}/fstrim %{buildroot}%{_sysconfdir}/cron.hourly/fstrim
@@ -106,11 +106,14 @@ dconf update
 %{_datadir}/polkit-1/rules.d/10-korora-policy.rules
 #%{_libdir}/firefox/browser/defaults/profile/adblockplus/
 %{_sysconfdir}/fonts/conf.d/10-autohint.conf
-%{_libdir}/firefox/browser/defaults/profile/prefs.js
+%{_libdir}/firefox/browser/defaults/preferences/firefox-korora-default-prefs.js
 #/etc/skel/Desktop/README.pdf
 %{_sysconfdir}/dconf/profile/user
 
 %changelog
+* Sat Jul 02 2016 Chris Smart <csmart@kororaproject.org> 0.13-2
+- Fix firefox preferences
+
 * Thu May 12 2016 Chris Smart <csmart@kororaproject.org> 0.13-1
 - Korora 24
 
