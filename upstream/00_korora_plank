@@ -1,4 +1,5 @@
 [net/launchpad/plank/docks/dock1]
 hide-mode='intelligent'
 position='left'
+theme='Arc-Plank'
 
