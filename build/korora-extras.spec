@@ -3,11 +3,11 @@
 Summary:        Korora Extras
 Name:           korora-extras
 Version:        0.13
-Release:        2%{?dist}.1
+Release:        2%{?dist}.2
 Source0:        %{name}-%{version}.tar.gz
 License:        GPLv3+
 Group:          System Environment/Base
-Requires:       korora-release
+Requires:       korora-release mozilla-arc-theme
 BuildRequires:  policycoreutils libselinux
 Requires(post): dconf
 Obsoletes:      kororaa-extras
