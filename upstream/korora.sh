@@ -5,7 +5,7 @@ fi
 tty -s || return
 
 # Source for git information in prompt
-if [ "${SHOW_GIT_PS1}" == "true" -a -f /usr/share/git-core/contrib/completion/git-prompt.sh ]; then
+if [ "${HIDE_GIT_PS1}" != "1" -a -f /usr/share/git-core/contrib/completion/git-prompt.sh ]; then
   source /usr/share/git-core/contrib/completion/git-prompt.sh
   GIT_PS1_SHOWDIRTYSTATE=1
   GIT_PS1_SHOWSTASHSTATE=1
