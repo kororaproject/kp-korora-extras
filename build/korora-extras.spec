@@ -3,7 +3,7 @@
 Summary:        Korora Extras
 Name:           korora-extras
 Version:        0.13
-Release:        3%{?dist}.1
+Release:        4%{?dist}.1
 Source0:        %{name}-%{version}.tar.gz
 License:        GPLv3+
 Group:          System Environment/Base
@@ -45,7 +45,7 @@ install -m 644 %{_builddir}/%{name}-%{version}/firefox-arc-theme-default-prefs.j
 #install -m 0755 %{_builddir}/%{name}-%{version}/fstrim %{buildroot}%{_sysconfdir}/cron.hourly/fstrim
 install -m 0755 %{_builddir}/%{name}-%{version}/vimrc %{buildroot}%{_sysconfdir}/skel/.vimrc
 #cp -a %{_builddir}/%{name}-%{version}/01_korora %{buildroot}%{_sysconfdir}/sudoers.d/
-install -m 0755 %{_builddir}/%{name}-%{version}/korora.sh %{buildroot}%{_sysconfdir}/profile.d/korora.sh
+install -m 0644 %{_builddir}/%{name}-%{version}/korora.sh %{buildroot}%{_sysconfdir}/profile.d/korora.sh
 install -m 0644 %{_builddir}/%{name}-%{version}/dircolors.ansi-universal %{buildroot}%{_datadir}/%{name}/dircolors.ansi-universal
 #install -m 0440 %{_builddir}/%{name}-%{version}/01_korora %{buildroot}%{_sysconfdir}/sudoers.d/01_korora
 #cp -a %{_builddir}/%{name}-%{version}/*sh %{buildroot}%{_bindir}/
@@ -121,6 +121,9 @@ dconf update
 %{_sysconfdir}/dconf/db/local.d/00_korora_plank
 
 %changelog
+* Fri Sep 23 2016 Ian Firns <firnsy@kororaproject.org> 0.13-4
+- korora.sh doesn't need the executable bit set
+
 * Thu Jul 07 2016 Ian Firns <firnsy@kororaproject.org> 0.13-3
 - custom.sh -> korora.sh and re-enable git prompt by default with ability to opt out.
 
