@@ -64,7 +64,7 @@ else
 fi
 
 # Check if we're local or remote or root
-if [[ -n "${SSH_CLIENT}" || -n "${SSH_TTY}" || "${USER}" == root ]] ; then
+if [[ -n "${SSH_CLIENT}" || -n "${SSH_TTY}" || ${EUID} -eq 0 ]] ; then
   # Prompt with hostname
   export PS1="\[${RESET}\][\[${BASE0}\]\A\[${RESET}\] \[${USER_COLOUR}\]\u@\h \[${CYAN}\]\w\[${YELLOW}\]\$(__git_ps1 \" (%s)\")\[${RESET}\]]\\$\[${RESET}\] "
 else
