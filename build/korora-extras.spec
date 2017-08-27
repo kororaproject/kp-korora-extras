@@ -115,7 +115,7 @@ dconf update
 #%{_libdir}/firefox/browser/defaults/profile/adblockplus/
 %{_sysconfdir}/fonts/conf.d/10-autohint.conf
 %{_libdir}/firefox/browser/defaults/preferences/firefox-korora-default-prefs.js
-%{_libdir}/firefox/browser/defaults/preferences/firefox-arc-theme-default-prefs.js
+#%{_libdir}/firefox/browser/defaults/preferences/firefox-arc-theme-default-prefs.js
 #/etc/skel/Desktop/README.pdf
 %{_sysconfdir}/dconf/profile/user
 %{_sysconfdir}/dconf/db/local.d/00_korora_plank
@@ -177,10 +177,10 @@ dconf update
 * Sat Dec 28 2013 Chris Smart <csmart@kororaproject.org> 0.8-1
 - Fix adblock plus subscription
 
-* Thu Sep 25 2013 Chris Smart <csmart@kororaproject.org> 0.7-5
+* Wed Sep 25 2013 Chris Smart <csmart@kororaproject.org> 0.7-5
 - Add cronjob for running fstrim
 
-* Thu Sep 25 2013 Chris Smart <csmart@kororaproject.org> 0.7-4
+* Wed Sep 25 2013 Chris Smart <csmart@kororaproject.org> 0.7-4
 - Fix font hinting link, which has moved to /usr/
 
 * Sat Aug 17 2013 Chris Smart <csmart@kororaproject.org> 0.7-3
@@ -225,7 +225,7 @@ dconf update
 * Mon Jul 18 2011 Chris Smart <chris@kororaa.org> 0.4-1
 - Fix lnk to README for Fedora 15, move links out of post into install.
 
-* Tue Jul 11 2011 Chris Smart <chris@kororaa.org> 0.3-3
+* Mon Jul 11 2011 Chris Smart <chris@kororaa.org> 0.3-3
 - Remove cgroups for fedora 15.
 
 * Fri Jul 08 2011 Chris Smart <chris@kororaa.org> 0.3-2
@@ -240,10 +240,10 @@ dconf update
 * Tue Mar 29 2011 Chris Smart <chris@kororaa.org> 0.2-4.2
 - Added cgroup to kororaa-extras, added GNOME tweaks.
 
-* Sun Mar 23 2011 Chris Smart <chris@kororaa.org> 0.2-4
+* Wed Mar 23 2011 Chris Smart <chris@kororaa.org> 0.2-4
 - Added Firefox user.js, added profile.d/custom.sh for bash tweaks, vimrc and Desktop links to skel, changes to config files.
 
-* Sun Mar 23 2011 Chris Smart <chris@kororaa.org> 0.1-4
+* Wed Mar 23 2011 Chris Smart <chris@kororaa.org> 0.1-4
 - Added Firefox4 repo, fix incorrect permissions on sudoers file.
 
 * Sun Feb 27 2011 Chris Smart <chris@kororaa.org> 0.1-1
