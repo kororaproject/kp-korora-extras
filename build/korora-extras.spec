@@ -3,11 +3,11 @@
 Summary:        Korora Extras
 Name:           korora-extras
 Version:        0.13
-Release:        4%{?dist}.1
+Release:        5%{?dist}
 Source0:        %{name}-%{version}.tar.gz
 License:        GPLv3+
 Group:          System Environment/Base
-Requires:       korora-release mozilla-arc-theme
+Requires:       korora-release
 BuildRequires:  policycoreutils libselinux
 Requires(post): dconf
 Obsoletes:      kororaa-extras
@@ -39,7 +39,7 @@ mkdir -p %{buildroot}%{_sysconfdir}/dconf/db/local.d
 
 
 install -m 644 %{_builddir}/%{name}-%{version}/firefox-korora-default-prefs.js %{buildroot}%{_libdir}/firefox/browser/defaults/preferences/firefox-korora-default-prefs.js
-install -m 644 %{_builddir}/%{name}-%{version}/firefox-arc-theme-default-prefs.js %{buildroot}%{_libdir}/firefox/browser/defaults/preferences/firefox-arc-theme-default-prefs.js
+#install -m 644 %{_builddir}/%{name}-%{version}/firefox-arc-theme-default-prefs.js %{buildroot}%{_libdir}/firefox/browser/defaults/preferences/firefox-arc-theme-default-prefs.js
 
 #cp -a %{_builddir}/%{name}-%{version}/*repo %{buildroot}%{_sysconfdir}/yum.repos.d/
 #install -m 0755 %{_builddir}/%{name}-%{version}/fstrim %{buildroot}%{_sysconfdir}/cron.hourly/fstrim
@@ -121,6 +121,9 @@ dconf update
 %{_sysconfdir}/dconf/db/local.d/00_korora_plank
 
 %changelog
+* Mon Aug 14 2017 Ian Firns <firnsy@kororaproject.org> 0.13-5
+- Remove mozilla-arc-theme requirement
+
 * Fri Sep 23 2016 Ian Firns <firnsy@kororaproject.org> 0.13-4
 - korora.sh doesn't need the executable bit set
 
