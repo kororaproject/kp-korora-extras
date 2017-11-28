@@ -2,8 +2,8 @@
 
 Summary:        Korora Extras
 Name:           korora-extras
-Version:        0.13
-Release:        5%{?dist}
+Version:        0.14
+Release:        1%{?dist}
 Source0:        %{name}-%{version}.tar.gz
 License:        GPLv3+
 Group:          System Environment/Base
@@ -121,6 +121,9 @@ dconf update
 %{_sysconfdir}/dconf/db/local.d/00_korora_plank
 
 %changelog
+* Tue Nov 28 2017 Ian Firns <firnsy@kororaproject.org> 0.14-1
+- Updated plank preferences
+
 * Mon Aug 14 2017 Ian Firns <firnsy@kororaproject.org> 0.13-5
 - Remove mozilla-arc-theme requirement
 

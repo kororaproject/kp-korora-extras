@@ -2,5 +2,5 @@
 hide-mode='window-dodge'
 position='left'
 theme='Arc'
-icon-size=32
-
+icon-size=48
+dock-items=['firefox.dockitem','mozilla-thunderbird.dockitem','pidgin.dockitem','vlc.dockitem','com.gexperts.Tilix.dockitem','org.mageia.dnfdragora.dockitem','cinnamon-settings.dockitem','nemo.dockitem']
